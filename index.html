@@ -118,6 +118,17 @@ nav button.on{color:var(--accent)}
   border:1px solid var(--rule);border-radius:var(--r)}
 #lock .btn{max-width:250px}
 .hide{display:none!important}
+.guide .lead{font-size:16px;line-height:1.5;margin:2px 0 6px}
+.guide p{font-size:14px;color:var(--ink);margin:0 0 10px}
+.guide dl{margin:0 0 12px;background:var(--surface);border:1px solid var(--rule);border-radius:var(--r);padding:4px 13px}
+.guide dt{font-weight:620;font-size:14px;margin-top:9px}
+.guide dd{margin:1px 0 9px;font-size:14px;color:var(--soft)}
+.guide ol{padding-left:20px;font-size:14px}.guide li{margin-bottom:6px}
+.prep{white-space:pre-wrap;font-size:13px;color:var(--soft);margin-top:9px;padding-top:9px;border-top:1px solid var(--rule)}
+.prep b{color:var(--ink)}
+details.prepAll{background:var(--surface);border:1px solid var(--rule);border-radius:var(--r);padding:11px 13px;margin-top:8px}
+details.prepAll summary{font-weight:620;font-size:14px;cursor:pointer}
+details.prepAll .prep{border:0;padding:0;margin-top:8px}
 #toast{position:fixed;left:16px;right:16px;bottom:calc(78px + env(safe-area-inset-bottom));z-index:60;
   background:var(--ink);color:var(--ground);padding:12px 15px;border-radius:var(--r);font-size:14px;
   opacity:0;transform:translateY(8px);transition:.2s;pointer-events:none}
@@ -143,8 +154,50 @@ nav button.on{color:var(--accent)}
 
 <main>
 
+<!-- GUIDE -->
+<section class="page" id="p-guide">
+  <div class="guide">
+    <p class="lead">This app has one job. It stops you taking a trade that does not fit your own rules. It does not show prices and it does not place orders. TradingView tells you when a level is hit, Kite is where you trade, this is where you decide.</p>
+
+    <h2>Plan, Sunday night</h2>
+    <p>Enter every idea you charted. The big number is reward divided by risk. Green is 2 or better, amber is under 2, red means the setup is broken. The bar under it shows risk and reward as actual widths so a bad ratio looks bad before you read it.</p>
+    <dl>
+      <dt>Trigger</dt><dd>The price at which you enter.</dd>
+      <dt>Stop</dt><dd>The price at which the idea is wrong and you get out.</dd>
+      <dt>Target</dt><dd>The price at which you take profit.</dd>
+      <dt>What is the target sitting on</dt><dd>Name the level. Previous day high, a swing, a resistance. If you cannot name one, the target is a guess and the app says so.</dd>
+      <dt>Previous day range</dt><dd>High minus low from the indicator already on your chart. Used to warn you when a stop is smaller than normal noise.</dd>
+      <dt>MIS or CNC</dt><dd>MIS is intraday with 5x buying power. CNC is delivery with no leverage and no shorts.</dd>
+    </dl>
+    <p>Shares and money at risk are worked out from your daily cap, ₹500 on ₹50,000. A red box means the setup cannot be saved. An amber box means it can, but only with a written reason that goes into the sheet.</p>
+
+    <h2>Today, weekday morning</h2>
+    <p>Shows how much risk you have left and every setup still live this week. Each one has three buttons.</p>
+    <dl>
+      <dt>Taken</dt><dd>You placed the order in Kite. Tap it straight after, not later.</dd>
+      <dt>Gapped past</dt><dd>Price opened beyond your trigger overnight. Do not chase, the R:R is already gone.</dd>
+      <dt>Skip today</dt><dd>You are not taking it today, it stays out of the way.</dd>
+    </dl>
+    <p>A second Taken in one day is blocked unless you type a high conviction reason. Below the setups you will see the week prep notes for each stock once the Sunday task has run.</p>
+
+    <h2>Log, after 3:30</h2>
+    <p>Pick the setup you took, enter both fills, say how it ended and tick any rule you broke. The app works out the profit and the R multiple and writes the row to your journal. The scorecard at the bottom counts rule breaks over the last 30 days. For the first month that number matters more than the money.</p>
+
+    <h2>Settings, the gear</h2>
+    <p>Backend URL, capital, daily risk percent, MIS leverage, minimum R:R, PIN, Face ID and the button that clears the week. Test connection tells you whether the phone can reach the backend.</p>
+
+    <h2>The week</h2>
+    <ol>
+      <li>Sunday. Chart, enter setups here, wait for the prep task, review with Claude, set TradingView alerts on the survivors.</li>
+      <li>Weekday. Alert fires, check Today for a gap, place the order with a stop, tap Taken.</li>
+      <li>After close. Log it.</li>
+      <li>Friday. Clear the week in settings, delete the alerts.</li>
+    </ol>
+  </div>
+</section>
+
 <!-- PLAN -->
-<section class="page on" id="p-plan">
+<section class="page" id="p-plan">
   <div class="gate" id="gate">
     <div class="num" id="rrNum">—<small>reward to risk</small></div>
     <div class="bar"><i class="rk" id="barR" style="width:0"></i><i class="rw" id="barW" style="width:0"></i></div>
@@ -264,6 +317,7 @@ nav button.on{color:var(--accent)}
   </div>
   <div class="field"><label for="stPin">PIN</label><input id="stPin" type="password" inputmode="numeric" maxlength="8"></div>
   <button class="btn" id="stSave">Save settings</button>
+  <button class="btn ghost" id="stTest">Test connection</button>
   <button class="btn ghost" id="bioReg">Set up Face ID on this phone</button>
   <button class="btn ghost" id="wipeWeek">Clear all setups for the week</button>
   <p style="font-size:12px;color:var(--soft);margin-top:18px">Setups v1. No live prices. Use TradingView alerts on your triggers.</p>
@@ -272,7 +326,8 @@ nav button.on{color:var(--accent)}
 </main>
 
 <nav>
-  <button data-p="plan" class="on"><b>◱</b>Plan</button>
+  <button data-p="guide" class="on"><b>?</b>Guide</button>
+  <button data-p="plan"><b>◱</b>Plan</button>
   <button data-p="today"><b>◐</b>Today</button>
   <button data-p="log"><b>▤</b>Log</button>
 </nav>
@@ -287,7 +342,7 @@ const BREACH = ["Took a second trade without high conviction","Moved the stop","
 const DEF = {url:'',capital:50000,pct:1,lev:5,minRR:2,pin:''};
 let S = Object.assign({}, DEF, JSON.parse(localStorage.getItem('setups.cfg')||'{}'));
 const saveCfg = () => localStorage.setItem('setups.cfg', JSON.stringify(S));
-let WEEK = [], TODAY = [], SCORE = null, dir='Long', prod='MIS';
+let WEEK = [], TODAY = [], SCORE = null, PREP = null, dir='Long', prod='MIS';
 
 const money = n => '₹' + Math.round(n).toLocaleString('en-IN');
 const num = v => { const n = parseFloat(String(v).replace(/[^0-9.\-]/g,'')); return isFinite(n) ? n : NaN; };
@@ -295,8 +350,14 @@ const todayISO = () => { const d=new Date(); return d.getFullYear()+'-'+String(d
 function toast(m){ const t=$('#toast'); t.textContent=m; t.classList.add('on'); clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove('on'),2600); }
 
 /* ---------- backend ---------- */
+function urlProblem(u){
+  if(!u) return 'Add your Apps Script URL in settings first.';
+  try{ const x=new URL(u); if(x.hostname!=='script.google.com'||!x.pathname.endsWith('/exec')) throw 0; }
+  catch(e){ return 'The backend URL in settings is not right. It must start with https://script.google.com and end in /exec. Open settings and paste it again.'; }
+  return '';
+}
 async function api(action, payload){
-  if(!S.url) throw new Error('Add your Apps Script URL in settings first.');
+  const bad = urlProblem(S.url); if(bad) throw new Error(bad);
   const r = await fetch(S.url, {
     method:'POST', redirect:'follow',
     headers:{'Content-Type':'text/plain;charset=utf-8'},   // text/plain avoids the CORS preflight
@@ -397,17 +458,35 @@ function resetForm(){
 }
 
 async function loadWeek(){
-  try{ WEEK = await api('getWeek'); }catch(e){ $('#weekList').innerHTML='<p class="empty">'+e.message+'</p>'; return; }
+  try{ WEEK = await api('getWeek'); }
+  catch(e){
+    const m='<p class="empty">'+e.message+'</p>';
+    $('#weekList').innerHTML=m; $('#todayList').innerHTML=m;
+    $('#lgSel').innerHTML='<option value="">Backend not reachable</option>';
+    return;
+  }
+  loadPrep();
   TODAY = WEEK.filter(s=>s.status==='Taken' && s.takenOn===todayISO());
   drawWeek(); drawToday(); drawLogPicker();
 }
-function card(s, acts){
+async function loadPrep(){
+  try{ PREP = await api('getPrep'); }catch(e){ PREP=null; }
+  drawToday();
+}
+function esc(t){ return String(t).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])); }
+function prepFor(tk){
+  if(!PREP||!PREP.text) return '';
+  const lines = PREP.text.split('\n').filter(l=>l.toUpperCase().includes(tk));
+  if(!lines.length) return '';
+  return '<div class="prep">'+lines.slice(0,6).map(l=>esc(l.trim())).join('\n')+'</div>';
+}
+function card(s, acts, withPrep){
   const d = s.direction==='Long'?'L':'S';
   return '<div class="card' + (s.status==='Dead'||s.status==='Gapped'?' dim':'') + '" data-tk="'+s.ticker+'">'
    + '<h3>'+s.ticker+' <span class="tag '+d+'">'+s.direction+' · '+(s.rr||'—')+':1</span></h3>'
    + '<div class="lv">In '+s.trigger+' · stop '+s.stop+' · target '+s.target+' · '+(s.qty||'?')+' sh'
    + (s.structure?' · '+s.structure:'') + (s.status&&s.status!=='Planned'?' · '+s.status:'') + '</div>'
-   + (acts?'<div class="acts">'+acts+'</div>':'') + '</div>';
+   + (acts?'<div class="acts">'+acts+'</div>':'') + (withPrep?prepFor(s.ticker):'') + '</div>';
 }
 function drawWeek(){
   $('#weekList').innerHTML = WEEK.length
@@ -423,9 +502,12 @@ function drawToday(){
   $('#bNote').textContent = TODAY.length
     ? TODAY.length+' trade'+(TODAY.length>1?'s':'')+' taken today. A second one needs high conviction and a written reason.'
     : 'No trade yet today. One is the limit.';
-  $('#todayList').innerHTML = live.length
-    ? live.map(s=>card(s,'<button data-act="take">Taken</button><button data-act="gap">Gapped past</button><button data-act="dead">Skip today</button>')).join('')
-    : '<p class="empty">No live setups. Plan them on Sunday.</p>';
+  $('#todayList').innerHTML = (live.length
+    ? live.map(s=>card(s,'<button data-act="take">Taken</button><button data-act="gap">Gapped past</button><button data-act="dead">Skip today</button>',true)).join('')
+    : '<p class="empty">No live setups. Plan them on Sunday.</p>')
+    + (PREP&&PREP.text
+        ? '<details class="prepAll"><summary>'+esc(PREP.title)+'</summary><div class="prep">'+esc(PREP.text)+'</div></details>'
+        : '<p class="empty" style="margin-top:8px">No week prep doc yet. It appears here after the Sunday task runs.</p>');
 }
 async function act(tk, a){
   if(a==='take' && TODAY.length>=1){
@@ -496,7 +578,7 @@ async function loadScore(){
 const b64u = b => btoa(String.fromCharCode(...new Uint8Array(b))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
 const unb64 = s => { s=s.replace(/-/g,'+').replace(/_/g,'/'); const r=atob(s),a=new Uint8Array(r.length); for(let i=0;i<r.length;i++)a[i]=r.charCodeAt(i); return a; };
 function lock(){ $('#lock').classList.remove('hide'); }
-function unlock(){ $('#lock').classList.add('hide'); $('#lockErr').textContent=''; $('#pinIn').value=''; loadWeek(); loadScore(); }
+function unlock(){ $('#lock').classList.add('hide'); $('#lockErr').textContent=''; $('#pinIn').value=''; loadWeek(); loadScore(); go(localStorage.getItem('setups.seen')?'plan':'guide'); localStorage.setItem('setups.seen','1'); }
 
 async function bioRegister(){
   try{
@@ -538,7 +620,7 @@ $('#pinBtn').onclick=()=>{
 };
 $('#pinIn').addEventListener('keydown',e=>{if(e.key==='Enter')$('#pinBtn').click();});
 
-const TITLES={plan:'Plan',today:'Today',log:'Log',set:'Settings'};
+const TITLES={guide:'Guide',plan:'Plan',today:'Today',log:'Log',set:'Settings'};
 function go(p){
   document.querySelectorAll('.page').forEach(x=>x.classList.remove('on'));
   $('#p-'+p).classList.add('on');
@@ -551,8 +633,14 @@ document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>go(b.dataset.p)
 $('#gear').onclick=()=>{
   $('#stUrl').value=S.url; $('#stCap').value=S.capital; $('#stPct').value=S.pct;
   $('#stLev').value=S.lev; $('#stRR').value=S.minRR; $('#stPin').value=S.pin; go('set'); };
+$('#stTest').onclick=async()=>{
+  const u=$('#stUrl').value.trim(); const bad=urlProblem(u); if(bad) return toast(bad);
+  try{ const r=await fetch(u,{redirect:'follow'}); const j=await r.json(); toast(j.ok?'Backend answered. You are connected.':'Backend answered but not as expected.'); }
+  catch(e){ toast('No answer. Check the deployment is set to Anyone.'); }
+};
 $('#stSave').onclick=()=>{
-  S.url=$('#stUrl').value.trim(); S.capital=num($('#stCap').value)||50000; S.pct=num($('#stPct').value)||1;
+  const u=$('#stUrl').value.trim(); const bad=urlProblem(u); if(bad) return toast(bad);
+  S.url=u; S.capital=num($('#stCap').value)||50000; S.pct=num($('#stPct').value)||1;
   S.lev=num($('#stLev').value)||5; S.minRR=num($('#stRR').value)||2; S.pin=$('#stPin').value.trim();
   saveCfg(); toast('Settings saved.'); evaluate(); loadWeek(); go('plan');
 };
