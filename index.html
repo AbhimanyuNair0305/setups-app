@@ -128,7 +128,7 @@ nav button.on{color:var(--accent)}
 
 <div id="lock">
   <h2>Setups is locked</h2>
-  <p style="color:var(--soft);margin:0;font-size:14px">Unlock to plan or log a trade.</p>
+  <p style="color:var(--soft);margin:0;font-size:14px" id="lockSub">Unlock to plan or log a trade.</p>
   <button class="btn" id="bioBtn">Unlock with Face ID</button>
   <input id="pinIn" type="password" inputmode="numeric" maxlength="8" placeholder="PIN">
   <button class="btn ghost" id="pinBtn">Unlock with PIN</button>
@@ -532,7 +532,10 @@ $('#save').onclick=saveSetup; $('#reset').onclick=resetForm;
 $('#lgSel').onchange=calcResult; $('#lgEntry').oninput=calcResult; $('#lgExit').oninput=calcResult;
 $('#lgSave').onclick=logTrade;
 $('#bioBtn').onclick=bioUnlock; $('#bioReg').onclick=bioRegister;
-$('#pinBtn').onclick=()=>{ if(S.pin && $('#pinIn').value===S.pin) unlock(); else $('#lockErr').textContent='Wrong PIN.'; };
+$('#pinBtn').onclick=()=>{
+  if(!S.pin){ unlock(); go('set'); toast('No PIN yet. Set one here.'); return; }  // first run
+  if($('#pinIn').value===S.pin) unlock(); else $('#lockErr').textContent='Wrong PIN.';
+};
 $('#pinIn').addEventListener('keydown',e=>{if(e.key==='Enter')$('#pinBtn').click();});
 
 const TITLES={plan:'Plan',today:'Today',log:'Log',set:'Settings'};
@@ -562,6 +565,10 @@ document.addEventListener('visibilitychange',()=>{
   else if(bg && Date.now()-bg>60000) lock();
 });
 if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
+if(!S.pin && !localStorage.getItem('setups.cred')){
+  $('#lockSub').textContent='First run. Tap Unlock with PIN, leave the box empty.';
+  $('#bioBtn').classList.add('hide');
+}
 lock(); evaluate();
 </script>
 </body>
