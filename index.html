@@ -4,656 +4,686 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="theme-color" content="#DDE3E2">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#1A1A1C">
 <title>Setups</title>
 <link rel="manifest" href="manifest.json">
 <style>
 :root{
-  --ground:#DDE3E2; --surface:#EFF2F1; --sunk:#D2DAD8;
-  --ink:#14201E; --soft:#5A6B67; --rule:#C3CCCA;
-  --pass:#2E6A50; --warn:#A86B12; --fail:#963528; --accent:#35514C;
-  --r:10px;
-  --ui:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --bg:#1A1A1C; --surface:#212124; --raised:#26262A; --sunk:#151517;
+  --line:#303036; --line2:#3A3A42;
+  --text:#E8E8EA; --mid:#A0A0A8; --dim:#70707A;
+  --blue:#387ED1; --green:#00B386; --red:#FF5722; --amber:#E0A128;
+  --r:6px; --ui:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;padding:0}
-body{
-  background:var(--ground); color:var(--ink); font-family:var(--ui);
-  font-size:16px; line-height:1.45; font-variant-numeric:tabular-nums;
-  -webkit-font-smoothing:antialiased;
-  padding-bottom:calc(64px + env(safe-area-inset-bottom));
-}
+html{background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--ui);font-size:15px;line-height:1.45;
+  font-variant-numeric:tabular-nums;-webkit-font-smoothing:antialiased;
+  padding-bottom:calc(62px + env(safe-area-inset-bottom));}
 button,input,select,textarea{font:inherit;color:inherit;font-variant-numeric:tabular-nums}
-:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+input,select,textarea{-webkit-appearance:none;appearance:none}
+:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
 
-header{
-  position:sticky;top:0;z-index:20;background:var(--ground);
-  padding:calc(10px + env(safe-area-inset-top)) 16px 10px;
-  border-bottom:1px solid var(--rule);
-  display:flex;align-items:baseline;gap:10px
-}
-header h1{margin:0;font-size:19px;font-weight:640;letter-spacing:-.01em}
-header .sub{font-size:13px;color:var(--soft);flex:1}
-header button{background:none;border:0;padding:6px;font-size:17px;cursor:pointer}
-
-main{padding:16px;max-width:600px;margin:0 auto}
+header{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);
+  padding:calc(9px + env(safe-area-inset-top)) 15px 9px;display:flex;align-items:baseline;gap:9px}
+header h1{margin:0;font-size:18px;font-weight:600;letter-spacing:-.01em}
+header .sub{font-size:12px;color:var(--dim);flex:1}
+header button{background:none;border:0;padding:5px;font-size:17px;color:var(--mid);cursor:pointer}
+main{padding:15px;max-width:620px;margin:0 auto}
 .page{display:none}.page.on{display:block}
 
-.field{margin-bottom:14px}
-.field label{display:block;font-size:13px;color:var(--soft);margin-bottom:5px}
-.field input,.field select,.field textarea{
-  width:100%;padding:12px 13px;background:var(--surface);
-  border:1px solid var(--rule);border-radius:var(--r)
-}
-.field textarea{min-height:64px;resize:vertical}
-.row{display:flex;gap:10px}.row>*{flex:1}
+.field{margin-bottom:13px}
+.field label{display:block;font-size:12px;color:var(--mid);margin-bottom:5px}
+.field input,.field select,.field textarea{width:100%;padding:11px 12px;background:var(--surface);
+  border:1px solid var(--line);border-radius:var(--r);color:var(--text)}
+.field input::placeholder,.field textarea::placeholder{color:var(--dim)}
+.field select{background-image:linear-gradient(45deg,transparent 50%,var(--mid) 50%),linear-gradient(135deg,var(--mid) 50%,transparent 50%);
+  background-position:calc(100% - 17px) 50%,calc(100% - 12px) 50%;background-size:5px 5px,5px 5px;background-repeat:no-repeat;padding-right:34px}
+.field textarea{min-height:58px;resize:vertical}
+.row{display:flex;gap:9px}.row>*{flex:1;min-width:0}
 
-.seg{display:flex;border:1px solid var(--rule);border-radius:var(--r);overflow:hidden;background:var(--surface)}
-.seg button{flex:1;padding:12px 4px;background:none;border:0;cursor:pointer;color:var(--soft);font-weight:520}
-.seg button[aria-pressed="true"]{background:var(--accent);color:#F2F5F4}
+.seg{display:flex;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--surface)}
+.seg button{flex:1;padding:11px 4px;background:none;border:0;cursor:pointer;color:var(--mid);font-size:14px}
+.seg button[aria-pressed="true"]{background:var(--blue);color:#fff;font-weight:600}
 
-/* hero gate */
-.gate{background:var(--surface);border:1px solid var(--rule);border-radius:14px;padding:16px;margin-bottom:16px}
-.gate .num{font-size:60px;line-height:.95;font-weight:660;letter-spacing:-.035em}
-.gate .num small{font-size:19px;font-weight:520;letter-spacing:0;color:var(--soft);margin-left:6px}
-.gate.p .num{color:var(--pass)} .gate.w .num{color:var(--warn)} .gate.f .num{color:var(--fail)}
-.bar{display:flex;height:16px;border-radius:4px;overflow:hidden;background:var(--sunk);margin:14px 0 8px}
-.bar i{display:block;transition:width .18s ease}
-.bar .rk{background:var(--fail)} .bar .rw{background:var(--pass)}
-.barkey{display:flex;justify-content:space-between;font-size:12px;color:var(--soft)}
-.stats{display:flex;gap:18px;margin-top:14px;padding-top:13px;border-top:1px solid var(--rule);flex-wrap:wrap}
-.stats div{min-width:76px}
-.stats b{display:block;font-size:21px;font-weight:620;letter-spacing:-.02em}
-.stats span{font-size:12px;color:var(--soft)}
+.gate{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:15px;margin-bottom:14px}
+.gate .num{font-size:52px;line-height:1;font-weight:600;letter-spacing:-.035em;color:var(--mid)}
+.gate .num small{font-size:11px;font-weight:400;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);display:block;margin-top:7px}
+.gate.p .num{color:var(--green)} .gate.w .num{color:var(--amber)} .gate.f .num{color:var(--red)}
+.bar{display:flex;height:6px;border-radius:3px;overflow:hidden;background:var(--sunk);margin:14px 0 6px}
+.bar i{display:block;transition:width .16s}
+.bar .rk{background:var(--red)} .bar .rw{background:var(--green)}
+.barkey{display:flex;justify-content:space-between;font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em}
+.stats{display:flex;gap:7px;margin-top:14px;padding-top:13px;border-top:1px solid var(--line)}
+.stats div{flex:1;min-width:0}
+.stats b{display:block;font-size:19px;font-weight:600;letter-spacing:-.02em}
+.stats span{font-size:11px;color:var(--dim)}
+.qtyBox{background:var(--raised);border:1px solid var(--line2);border-radius:var(--r);padding:11px 13px;margin-bottom:14px;
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+.qtyBox .n{font-size:30px;font-weight:600;letter-spacing:-.03em;color:var(--blue)}
+.qtyBox .t{font-size:12px;color:var(--mid);text-align:right;line-height:1.35}
 
-.flags{margin:0 0 16px;padding:0;list-style:none}
-.flags li{
-  padding:11px 13px;border-radius:var(--r);margin-bottom:8px;font-size:14px;
-  border-left:3px solid; background:var(--surface)
-}
-.flags li.f{border-color:var(--fail);color:var(--fail)}
-.flags li.w{border-color:var(--warn);color:var(--warn)}
+.flags{margin:0 0 14px;padding:0;list-style:none}
+.flags li{padding:10px 12px;border-radius:var(--r);margin-bottom:7px;font-size:13px;line-height:1.4;
+  background:var(--surface);border-left:2px solid}
+.flags li.f{border-color:var(--red);color:#FFA98C}
+.flags li.w{border-color:var(--amber);color:#E8C078}
 
-.btn{width:100%;padding:14px;border:0;border-radius:var(--r);background:var(--accent);color:#F2F5F4;font-weight:620;cursor:pointer}
-.btn[disabled]{background:var(--sunk);color:var(--soft)}
-.btn.ghost{background:none;border:1px solid var(--rule);color:var(--ink)}
-.btn.danger{background:var(--fail)}
-.btn+.btn{margin-top:9px}
+.btn{width:100%;padding:13px;border:0;border-radius:var(--r);background:var(--blue);color:#fff;font-weight:600;cursor:pointer}
+.btn[disabled]{background:var(--raised);color:var(--dim)}
+.btn.ghost{background:none;border:1px solid var(--line2);color:var(--text);font-weight:500}
+.btn.go{background:var(--green)}
+.btn+.btn{margin-top:8px}
 
-.card{background:var(--surface);border:1px solid var(--rule);border-radius:var(--r);padding:13px;margin-bottom:10px}
-.card h3{margin:0 0 3px;font-size:16px;font-weight:620;display:flex;justify-content:space-between;align-items:baseline;gap:8px}
-.card .lv{font-size:13px;color:var(--soft)}
-.card .acts{display:flex;gap:8px;margin-top:11px}
-.card .acts button{flex:1;padding:9px;font-size:13px;border:1px solid var(--rule);border-radius:8px;background:var(--ground);cursor:pointer}
-.tag{font-size:11px;font-weight:620;padding:3px 7px;border-radius:20px;background:var(--sunk);color:var(--soft)}
-.tag.L{background:#D3E3DA;color:var(--pass)} .tag.S{background:#EEDAD6;color:var(--fail)}
-.dim{opacity:.5}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px;margin-bottom:9px}
+.card h3{margin:0 0 3px;font-size:15px;font-weight:600;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.card .lv{font-size:12.5px;color:var(--mid)}
+.card .acts{display:flex;gap:7px;margin-top:10px}
+.card .acts button{flex:1;padding:8px 2px;font-size:12px;border:1px solid var(--line2);border-radius:var(--r);
+  background:var(--raised);color:var(--text);cursor:pointer}
+.card .acts button.ok{border-color:var(--green);color:var(--green)}
+.tag{font-size:10px;font-weight:700;padding:2px 6px;border-radius:3px;letter-spacing:.04em;flex:none}
+.tag.L{background:rgba(56,126,209,.18);color:#6FA8E8} .tag.S{background:rgba(255,87,34,.16);color:#FF8A5C}
+.pill{font-size:10px;font-weight:600;padding:2px 6px;border-radius:3px;background:var(--raised);color:var(--dim);margin-left:5px}
+.pill.ok{background:rgba(0,179,134,.16);color:var(--green)}
+.dim{opacity:.42}
 
-.budget{background:var(--surface);border:1px solid var(--rule);border-radius:14px;padding:15px;margin-bottom:16px}
-.budget .top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:11px}
-.budget .top b{font-size:27px;font-weight:640;letter-spacing:-.02em}
-.meter{height:8px;background:var(--sunk);border-radius:4px;overflow:hidden}
-.meter i{display:block;height:100%;background:var(--accent)}
+.budget{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px;margin-bottom:14px}
+.budget .top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+.budget .top b{font-size:25px;font-weight:600;letter-spacing:-.02em}
+.meter{height:5px;background:var(--sunk);border-radius:3px;overflow:hidden}
+.meter i{display:block;height:100%;background:var(--blue)}
 
-h2{font-size:13px;font-weight:620;color:var(--soft);margin:22px 0 10px}
-.empty{padding:26px 16px;text-align:center;color:var(--soft);font-size:14px;border:1px dashed var(--rule);border-radius:var(--r)}
-.chk{display:flex;align-items:center;gap:10px;padding:9px 0;font-size:14px}
-.chk input{width:21px;height:21px;flex:none}
+h2{font-size:11px;font-weight:700;color:var(--dim);margin:20px 0 9px;text-transform:uppercase;letter-spacing:.07em}
+.empty{padding:22px 15px;text-align:center;color:var(--dim);font-size:13px;border:1px dashed var(--line2);border-radius:var(--r)}
+.chk{display:flex;align-items:center;gap:10px;padding:7px 0;font-size:13.5px}
+.chk input{width:19px;height:19px;flex:none;accent-color:var(--blue)}
 
-nav{
-  position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;
-  background:var(--surface);border-top:1px solid var(--rule);
-  padding-bottom:env(safe-area-inset-bottom)
-}
-nav button{flex:1;padding:11px 4px 9px;background:none;border:0;cursor:pointer;color:var(--soft);font-size:11px;font-weight:560}
-nav button b{display:block;font-size:17px;font-weight:400;margin-bottom:1px}
-nav button.on{color:var(--accent)}
+.prep{font-size:12.5px;color:var(--mid);margin-top:9px;padding-top:9px;border-top:1px solid var(--line);white-space:pre-wrap;line-height:1.5}
+details.mkt{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px;margin-bottom:9px}
+details.mkt summary{font-weight:600;font-size:14px;cursor:pointer;list-style:none}
+details.mkt summary::-webkit-details-marker{display:none}
+details.mkt summary::after{content:' \25BE';color:var(--dim)}
+details.mkt[open] summary::after{content:' \25B4'}
 
-#lock{position:fixed;inset:0;z-index:100;background:var(--ground);display:flex;flex-direction:column;
-  align-items:center;justify-content:center;gap:16px;padding:32px;text-align:center}
-#lock h2{color:var(--ink);font-size:21px;margin:0}
-#lock input{width:170px;text-align:center;letter-spacing:.5em;padding:13px;background:var(--surface);
-  border:1px solid var(--rule);border-radius:var(--r)}
-#lock .btn{max-width:250px}
+table.cost{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:12px}
+table.cost td{padding:4px 0;color:var(--mid)}
+table.cost td:last-child{text-align:right;color:var(--text)}
+table.cost tr.tot td{border-top:1px solid var(--line);padding-top:7px;font-weight:600;color:var(--text)}
+
+.guide p{font-size:14px;color:var(--mid);margin:0 0 10px;line-height:1.55}
+.guide p.lead{color:var(--text);font-size:15px}
+.guide dl{margin:0 0 12px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:3px 13px}
+.guide dt{font-weight:600;font-size:13.5px;margin-top:9px;color:var(--text)}
+.guide dd{margin:1px 0 9px;font-size:13px;color:var(--mid);line-height:1.5}
+.guide ol{padding-left:19px;font-size:13.5px;color:var(--mid)}.guide li{margin-bottom:6px}
+.guide b{color:var(--text)}
+
+nav{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;background:var(--surface);
+  border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
+nav button{flex:1;padding:9px 2px 7px;background:none;border:0;cursor:pointer;color:var(--dim);font-size:10px;font-weight:600}
+nav button b{display:block;font-size:16px;font-weight:400;margin-bottom:2px}
+nav button.on{color:var(--blue)}
+
+#lock{position:fixed;inset:0;z-index:100;background:var(--bg);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:15px;padding:30px;text-align:center}
+#lock h2{color:var(--text);font-size:20px;margin:0;text-transform:none;letter-spacing:0}
+#lock input{width:165px;text-align:center;letter-spacing:.5em;padding:12px;background:var(--surface);
+  border:1px solid var(--line);border-radius:var(--r);color:var(--text)}
+#lock .btn{max-width:245px}
 .hide{display:none!important}
-.guide .lead{font-size:16px;line-height:1.5;margin:2px 0 6px}
-.guide p{font-size:14px;color:var(--ink);margin:0 0 10px}
-.guide dl{margin:0 0 12px;background:var(--surface);border:1px solid var(--rule);border-radius:var(--r);padding:4px 13px}
-.guide dt{font-weight:620;font-size:14px;margin-top:9px}
-.guide dd{margin:1px 0 9px;font-size:14px;color:var(--soft)}
-.guide ol{padding-left:20px;font-size:14px}.guide li{margin-bottom:6px}
-.prep{white-space:pre-wrap;font-size:13px;color:var(--soft);margin-top:9px;padding-top:9px;border-top:1px solid var(--rule)}
-.prep b{color:var(--ink)}
-details.prepAll{background:var(--surface);border:1px solid var(--rule);border-radius:var(--r);padding:11px 13px;margin-top:8px}
-details.prepAll summary{font-weight:620;font-size:14px;cursor:pointer}
-details.prepAll .prep{border:0;padding:0;margin-top:8px}
-#toast{position:fixed;left:16px;right:16px;bottom:calc(78px + env(safe-area-inset-bottom));z-index:60;
-  background:var(--ink);color:var(--ground);padding:12px 15px;border-radius:var(--r);font-size:14px;
-  opacity:0;transform:translateY(8px);transition:.2s;pointer-events:none}
+#toast{position:fixed;left:15px;right:15px;bottom:calc(74px + env(safe-area-inset-bottom));z-index:60;
+  background:var(--raised);border:1px solid var(--line2);color:var(--text);padding:11px 14px;border-radius:var(--r);
+  font-size:13.5px;opacity:0;transform:translateY(6px);transition:.18s;pointer-events:none}
 #toast.on{opacity:1;transform:none}
+.spin{display:inline-block;width:13px;height:13px;border:2px solid rgba(255,255,255,.28);
+  border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite;vertical-align:-2px;margin-right:7px}
+@keyframes sp{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
 
 <div id="lock">
-  <h2>Setups is locked</h2>
-  <p style="color:var(--soft);margin:0;font-size:14px" id="lockSub">Unlock to plan or log a trade.</p>
+  <h2>Setups</h2>
+  <p style="color:var(--dim);margin:0;font-size:13.5px" id="lockSub">Unlock to plan or log a trade.</p>
   <button class="btn" id="bioBtn">Unlock with Face ID</button>
   <input id="pinIn" type="password" inputmode="numeric" maxlength="8" placeholder="PIN">
   <button class="btn ghost" id="pinBtn">Unlock with PIN</button>
-  <p id="lockErr" style="color:var(--fail);font-size:13px;min-height:18px;margin:0"></p>
+  <p id="lockErr" style="color:var(--red);font-size:12.5px;min-height:17px;margin:0"></p>
 </div>
 
-<header>
-  <h1 id="ttl">Plan</h1>
-  <span class="sub" id="sub"></span>
-  <button id="gear" aria-label="Settings">⚙</button>
-</header>
-
+<header><h1 id="ttl">Guide</h1><span class="sub" id="sub"></span><button id="gear" aria-label="Settings">&#9881;</button></header>
 <main>
 
-<!-- GUIDE -->
-<section class="page" id="p-guide">
-  <div class="guide">
-    <p class="lead">This app has one job. It stops you taking a trade that does not fit your own rules. It does not show prices and it does not place orders. TradingView tells you when a level is hit, Kite is where you trade, this is where you decide.</p>
+<section class="page on" id="p-guide">
+ <div class="guide">
+  <p class="lead">This app has one job. It stops you taking a trade that breaks your own rules, and it remembers what happened when you did. No live prices, no orders. TradingView tells you a level was hit, Kite is where you trade, this is where you decide and record.</p>
 
-    <h2>Plan, Sunday night</h2>
-    <p>Enter every idea you charted. The big number is reward divided by risk. Green is 2 or better, amber is under 2, red means the setup is broken. The bar under it shows risk and reward as actual widths so a bad ratio looks bad before you read it.</p>
-    <dl>
-      <dt>Trigger</dt><dd>The price at which you enter.</dd>
-      <dt>Stop</dt><dd>The price at which the idea is wrong and you get out.</dd>
-      <dt>Target</dt><dd>The price at which you take profit.</dd>
-      <dt>What is the target sitting on</dt><dd>Name the level. Previous day high, a swing, a resistance. If you cannot name one, the target is a guess and the app says so.</dd>
-      <dt>Previous day range</dt><dd>High minus low from the indicator already on your chart. Used to warn you when a stop is smaller than normal noise.</dd>
-      <dt>MIS or CNC</dt><dd>MIS is intraday with 5x buying power. CNC is delivery with no leverage and no shorts.</dd>
-    </dl>
-    <p>Shares and money at risk are worked out from your daily cap, ₹500 on ₹50,000. A red box means the setup cannot be saved. An amber box means it can, but only with a written reason that goes into the sheet.</p>
+  <h2>Plan &middot; Sunday night</h2>
+  <p>Enter every idea you charted. The big number is reward divided by risk. Green at 2 or better, amber below 2, red means the setup is broken and cannot be saved. The blue box gives you the share count for your capital.</p>
+  <dl>
+    <dt>Trigger</dt><dd>Where you enter.</dd>
+    <dt>Stop</dt><dd>Where the idea is proven wrong and you are out.</dd>
+    <dt>Target</dt><dd>Where you take profit.</dd>
+    <dt>What the target sits on</dt><dd>Name the level. If you cannot, it is a guess and the app says so. Four of your targets last week had nothing behind them.</dd>
+    <dt>Previous day range</dt><dd>High minus low, from the indicator already on your chart. Catches a stop sitting inside normal noise.</dd>
+    <dt>MIS or CNC</dt><dd>MIS is intraday with 5x buying power. CNC is delivery, no leverage, and shorting is impossible.</dd>
+  </dl>
+  <p>Everything you save starts as <b>Pending</b>. It goes nowhere near the Today tab until you mark it <b>Confirmed</b>, which you do after the Sunday review. That is how only the setups that survived the review reach your trading day.</p>
 
-    <h2>Today, weekday morning</h2>
-    <p>Shows how much risk you have left and every setup still live this week. Each one has three buttons.</p>
-    <dl>
-      <dt>Taken</dt><dd>You placed the order in Kite. Tap it straight after, not later.</dd>
-      <dt>Gapped past</dt><dd>Price opened beyond your trigger overnight. Do not chase, the R:R is already gone.</dd>
-      <dt>Skip today</dt><dd>You are not taking it today, it stays out of the way.</dd>
-    </dl>
-    <p>A second Taken in one day is blocked unless you type a high conviction reason. Below the setups you will see the week prep notes for each stock once the Sunday task has run.</p>
+  <h2>Today &middot; what it is for</h2>
+  <p>This is the morning gate, and it exists because you wake up late and rushed. It answers four questions on one screen without you opening a chart.</p>
+  <dl>
+    <dt>How much can I still lose today</dt><dd>Your cap minus what is already committed. It stops a bad morning becoming a bad month.</dd>
+    <dt>Did it gap past my trigger</dt><dd>If price opened beyond your level the reward to risk you planned no longer exists. Tap Gapped past and it is dead for the day. This button saves you the most money.</dd>
+    <dt>Have I already traded</dt><dd>A second Taken is blocked unless you type a high conviction reason, which gets stored.</dd>
+    <dt>What is the news on this stock</dt><dd>Week prep notes sit under each setup, market overview above them. No sheet, no doc, no switching apps.</dd>
+  </dl>
 
-    <h2>Log, after 3:30</h2>
-    <p>Pick the setup you took, enter both fills, say how it ended and tick any rule you broke. The app works out the profit and the R multiple and writes the row to your journal. The scorecard at the bottom counts rule breaks over the last 30 days. For the first month that number matters more than the money.</p>
+  <h2>Log &middot; after 3:30</h2>
+  <p>Pick the setup, set the quantity you actually filled, enter both prices and say how it ended. The app computes Zerodha's real charges, brokerage, STT, exchange, SEBI, stamp duty and GST, and shows net profit after them. Gross profit is a lie at your size. A stopped out trade costs you roughly <b>&#8377;40 more</b> than the stop alone suggests.</p>
+  <p>Below that is your running profit and loss across every logged trade, and the count of rule breaks in the last 30 days. For the first month the rule break number is the one that matters.</p>
 
-    <h2>Settings, the gear</h2>
-    <p>Backend URL, capital, daily risk percent, MIS leverage, minimum R:R, PIN, Face ID and the button that clears the week. Test connection tells you whether the phone can reach the backend.</p>
-
-    <h2>The week</h2>
-    <ol>
-      <li>Sunday. Chart, enter setups here, wait for the prep task, review with Claude, set TradingView alerts on the survivors.</li>
-      <li>Weekday. Alert fires, check Today for a gap, place the order with a stop, tap Taken.</li>
-      <li>After close. Log it.</li>
-      <li>Friday. Clear the week in settings, delete the alerts.</li>
-    </ol>
-  </div>
+  <h2>The week</h2>
+  <ol>
+    <li>Sunday, chart, enter setups here, review with Claude, mark the survivors Confirmed.</li>
+    <li>Monday 2am, the prep task writes the news into this app on its own.</li>
+    <li>Weekday, alert fires, check Today for a gap, place the order with a stop, tap Taken.</li>
+    <li>After close, log it with the real quantity.</li>
+    <li>Friday, clear the week in settings and delete the TradingView alerts.</li>
+  </ol>
+ </div>
 </section>
 
-<!-- PLAN -->
 <section class="page" id="p-plan">
   <div class="gate" id="gate">
-    <div class="num" id="rrNum">—<small>reward to risk</small></div>
+    <div class="num" id="rrNum">&mdash;<small>reward to risk</small></div>
     <div class="bar"><i class="rk" id="barR" style="width:0"></i><i class="rw" id="barW" style="width:0"></i></div>
     <div class="barkey"><span>Risk</span><span>Reward</span></div>
     <div class="stats">
-      <div><b id="sQty">—</b><span>Shares</span></div>
-      <div><b id="sRisk">—</b><span>At risk</span></div>
-      <div><b id="sNot">—</b><span>Notional</span></div>
+      <div><b id="sRisk">&mdash;</b><span>Worst case</span></div>
+      <div><b id="sWin">&mdash;</b><span>If target hits</span></div>
+      <div><b id="sNot">&mdash;</b><span>Notional</span></div>
     </div>
   </div>
 
+  <div class="qtyBox"><span class="n" id="sQty">&mdash;</span><span class="t" id="sQtyT">enter the levels<br>to size the trade</span></div>
   <ul class="flags" id="flags"></ul>
 
-  <div class="field">
-    <label for="tk">Stock</label>
+  <div class="field"><label for="tk">Stock</label>
     <input id="tk" list="n50" autocapitalize="characters" autocorrect="off" spellcheck="false" placeholder="DRREDDY">
-    <datalist id="n50"></datalist>
-  </div>
+    <datalist id="n50"></datalist></div>
 
-  <div class="field">
-    <label>Direction</label>
-    <div class="seg" id="dir">
-      <button type="button" data-v="Long" aria-pressed="true">Long</button>
-      <button type="button" data-v="Short" aria-pressed="false">Short</button>
-    </div>
-  </div>
+  <div class="field"><label>Direction</label><div class="seg" id="dir">
+    <button type="button" data-v="Long" aria-pressed="true">Long</button>
+    <button type="button" data-v="Short" aria-pressed="false">Short</button></div></div>
 
-  <div class="field">
-    <label>Product</label>
-    <div class="seg" id="prod">
-      <button type="button" data-v="MIS" aria-pressed="true">MIS intraday</button>
-      <button type="button" data-v="CNC" aria-pressed="false">CNC delivery</button>
-    </div>
-  </div>
+  <div class="field"><label>Product</label><div class="seg" id="prod">
+    <button type="button" data-v="MIS" aria-pressed="true">MIS intraday</button>
+    <button type="button" data-v="CNC" aria-pressed="false">CNC delivery</button></div></div>
 
   <div class="row">
-    <div class="field"><label for="trg">Trigger</label><input id="trg" type="text" inputmode="decimal"></div>
-    <div class="field"><label for="stp">Stop</label><input id="stp" type="text" inputmode="decimal"></div>
-    <div class="field"><label for="tgt">Target</label><input id="tgt" type="text" inputmode="decimal"></div>
+    <div class="field"><label for="trg">Trigger</label><input id="trg" inputmode="decimal"></div>
+    <div class="field"><label for="stp">Stop</label><input id="stp" inputmode="decimal"></div>
+    <div class="field"><label for="tgt">Target</label><input id="tgt" inputmode="decimal"></div>
   </div>
 
-  <div class="field">
-    <label for="struct">What is the target sitting on</label>
-    <select id="struct">
-      <option value="">Pick a level</option>
-      <option>Previous day high</option>
-      <option>Previous day low</option>
-      <option>Swing high</option>
-      <option>Swing low</option>
-      <option>Resistance</option>
-      <option>Support</option>
-      <option>EMA</option>
-      <option>Zone edge</option>
-      <option value="None">Nothing, I picked the number</option>
-    </select>
-  </div>
+  <div class="field"><label for="struct">What the target sits on</label><select id="struct">
+    <option value="">Pick a level</option><option>Previous day high</option><option>Previous day low</option>
+    <option>Swing high</option><option>Swing low</option><option>Resistance</option><option>Support</option>
+    <option>EMA</option><option>Zone edge</option><option value="None">Nothing, I picked the number</option>
+  </select></div>
 
-  <div class="field">
-    <label for="pdr">Previous day range (high minus low)</label>
-    <input id="pdr" type="text" inputmode="decimal" placeholder="e.g. 4.8">
-  </div>
-
+  <div class="field"><label for="pdr">Previous day range, high minus low</label><input id="pdr" inputmode="decimal" placeholder="24"></div>
   <div class="field"><label for="note">Note</label><textarea id="note" placeholder="Trendline plus support"></textarea></div>
 
   <button class="btn" id="save">Save setup</button>
   <button class="btn ghost" id="reset">Clear form</button>
 
-  <h2>This week</h2>
+  <h2>Planned this week</h2>
   <div id="weekList"></div>
 </section>
 
-<!-- TODAY -->
 <section class="page" id="p-today">
   <div class="budget">
-    <div class="top"><span style="color:var(--soft);font-size:13px">Left to risk today</span><b id="bLeft">—</b></div>
+    <div class="top"><span style="color:var(--mid);font-size:12.5px">Left to risk today</span><b id="bLeft">&mdash;</b></div>
     <div class="meter"><i id="bMeter" style="width:0"></i></div>
-    <p style="margin:9px 0 0;font-size:13px;color:var(--soft)" id="bNote"></p>
+    <p style="margin:8px 0 0;font-size:12.5px;color:var(--dim)" id="bNote"></p>
   </div>
-  <h2>Live setups</h2>
+  <div id="mktBox"></div>
+  <h2>Confirmed for this week</h2>
   <div id="todayList"></div>
 </section>
 
-<!-- LOG -->
 <section class="page" id="p-log">
   <div class="field"><label for="lgSel">Which setup</label><select id="lgSel"></select></div>
   <div class="row">
-    <div class="field"><label for="lgEntry">Entry fill</label><input id="lgEntry" type="text" inputmode="decimal"></div>
-    <div class="field"><label for="lgExit">Exit fill</label><input id="lgExit" type="text" inputmode="decimal"></div>
+    <div class="field"><label for="lgQty">Quantity filled</label><input id="lgQty" inputmode="numeric"></div>
+    <div class="field"><label for="lgEntry">Entry price</label><input id="lgEntry" inputmode="decimal"></div>
+    <div class="field"><label for="lgExit">Exit price</label><input id="lgExit" inputmode="decimal"></div>
   </div>
-  <div class="field">
-    <label for="lgWhy">How it ended</label>
-    <select id="lgWhy"><option>Target hit</option><option>Stop hit</option><option>Closed manually</option><option>Square off at 3:20</option></select>
+  <div class="field"><label for="lgWhy">How it ended</label><select id="lgWhy">
+    <option>Target hit</option><option>Stop hit</option><option>Closed manually</option><option>Square off at 3:20</option>
+  </select></div>
+
+  <div class="gate" id="resGate">
+    <div class="num" id="resPnl">&mdash;<small>net after charges</small></div>
+    <div class="stats">
+      <div><b id="resGross">&mdash;</b><span>Gross</span></div>
+      <div><b id="resCost">&mdash;</b><span>Charges</span></div>
+      <div><b id="resR">&mdash;</b><span>R multiple</span></div>
+    </div>
+    <table class="cost" id="costTbl"></table>
   </div>
+
   <h2>Did you break a rule</h2>
   <div id="breaches"></div>
   <div class="field"><label for="lgNote">What happened</label><textarea id="lgNote"></textarea></div>
-  <div class="gate" id="resGate" style="margin-top:4px">
-    <div class="num" id="resPnl">—<small>profit and loss</small></div>
-    <div class="stats"><div><b id="resR">—</b><span>R multiple</span></div><div><b id="resPlan">—</b><span>Planned R</span></div></div>
-  </div>
-  <button class="btn" id="lgSave">Log trade</button>
+  <button class="btn go" id="lgSave">Log trade</button>
 
-  <h2>Last 30 days</h2>
+  <h2>All time</h2>
   <div id="scorecard"></div>
 </section>
 
-<!-- SETTINGS -->
 <section class="page" id="p-set">
-  <div class="field"><label for="stUrl">Apps Script web app URL</label><input id="stUrl" type="url" placeholder="https://script.google.com/macros/s/.../exec"></div>
-  <div class="row">
-    <div class="field"><label for="stCap">Capital</label><input id="stCap" type="text" inputmode="decimal"></div>
-    <div class="field"><label for="stPct">Daily risk %</label><input id="stPct" type="text" inputmode="decimal"></div>
+  <div class="field"><label for="stUrl">Apps Script web app URL</label><input id="stUrl" type="url" placeholder="https://script.google.com/macros/s/&hellip;/exec"></div>
+  <button class="btn ghost" id="stTest">Test connection</button>
+  <div class="row" style="margin-top:13px">
+    <div class="field"><label for="stCap">Capital</label><input id="stCap" inputmode="decimal"></div>
+    <div class="field"><label for="stPct">Daily risk %</label><input id="stPct" inputmode="decimal"></div>
   </div>
   <div class="row">
-    <div class="field"><label for="stLev">MIS leverage</label><input id="stLev" type="text" inputmode="decimal"></div>
-    <div class="field"><label for="stRR">Minimum R:R</label><input id="stRR" type="text" inputmode="decimal"></div>
+    <div class="field"><label for="stLev">MIS leverage</label><input id="stLev" inputmode="decimal"></div>
+    <div class="field"><label for="stRR">Minimum R:R</label><input id="stRR" inputmode="decimal"></div>
   </div>
   <div class="field"><label for="stPin">PIN</label><input id="stPin" type="password" inputmode="numeric" maxlength="8"></div>
   <button class="btn" id="stSave">Save settings</button>
-  <button class="btn ghost" id="stTest">Test connection</button>
   <button class="btn ghost" id="bioReg">Set up Face ID on this phone</button>
   <button class="btn ghost" id="wipeWeek">Clear all setups for the week</button>
-  <p style="font-size:12px;color:var(--soft);margin-top:18px">Setups v1. No live prices. Use TradingView alerts on your triggers.</p>
+  <p style="font-size:11.5px;color:var(--dim);margin-top:16px">Setups v4. Charges follow Zerodha equity rates. Your contract note is the final word.</p>
 </section>
-
 </main>
 
 <nav>
   <button data-p="guide" class="on"><b>?</b>Guide</button>
-  <button data-p="plan"><b>◱</b>Plan</button>
-  <button data-p="today"><b>◐</b>Today</button>
-  <button data-p="log"><b>▤</b>Log</button>
+  <button data-p="plan"><b>&#9713;</b>Plan</button>
+  <button data-p="today"><b>&#9680;</b>Today</button>
+  <button data-p="log"><b>&#9636;</b>Log</button>
 </nav>
 <div id="toast"></div>
 
 <script>
 'use strict';
-const $ = s => document.querySelector(s);
-const N50 = "ADANIENT ADANIPORTS APOLLOHOSP ASIANPAINT AXISBANK BAJAJ-AUTO BAJFINANCE BAJAJFINSV BEL BHARTIARTL CIPLA COALINDIA DRREDDY EICHERMOT ETERNAL GRASIM HCLTECH HDFCBANK HDFCLIFE HINDALCO HINDUNILVR ICICIBANK INDIGO INFY ITC JIOFIN JSWSTEEL KOTAKBANK LT M&M MARUTI MAXHEALTH NESTLEIND NTPC ONGC POWERGRID RELIANCE SBILIFE SBIN SHRIRAMFIN SUNPHARMA TCS TATACONSUM TMPV TATASTEEL TECHM TITAN TRENT ULTRACEMCO WIPRO".split(' ');
-const BREACH = ["Took a second trade without high conviction","Moved the stop","Entered before the trigger","Entered after a gap past the trigger","Cut the target short","Skipped the journal until later","Oversized the position"];
+var $ = function(s){ return document.querySelector(s); };
+var N50 = "ADANIENT ADANIPORTS APOLLOHOSP ASIANPAINT AXISBANK BAJAJ-AUTO BAJFINANCE BAJAJFINSV BEL BHARTIARTL CIPLA COALINDIA DRREDDY EICHERMOT ETERNAL GRASIM HCLTECH HDFCBANK HDFCLIFE HINDALCO HINDUNILVR ICICIBANK INDIGO INFY ITC JIOFIN JSWSTEEL KOTAKBANK LT M&M MARUTI MAXHEALTH NESTLEIND NTPC ONGC POWERGRID RELIANCE SBILIFE SBIN SHRIRAMFIN SUNPHARMA TCS TATACONSUM TMPV TATASTEEL TECHM TITAN TRENT ULTRACEMCO WIPRO".split(' ');
+var BREACH = ["Took a second trade without high conviction","Moved the stop","Entered before the trigger","Entered after a gap past the trigger","Cut the target short","Oversized the position"];
+var DEF = {url:'',capital:50000,pct:1,lev:5,minRR:2,pin:''};
+var S = Object.assign({}, DEF, JSON.parse(localStorage.getItem('setups.cfg')||'{}'));
+function saveCfg(){ localStorage.setItem('setups.cfg', JSON.stringify(S)); }
+var WEEK=[], TODAY=[], PREP=null, dir='Long', prod='MIS';
 
-const DEF = {url:'',capital:50000,pct:1,lev:5,minRR:2,pin:''};
-let S = Object.assign({}, DEF, JSON.parse(localStorage.getItem('setups.cfg')||'{}'));
-const saveCfg = () => localStorage.setItem('setups.cfg', JSON.stringify(S));
-let WEEK = [], TODAY = [], SCORE = null, PREP = null, dir='Long', prod='MIS';
+function money(n){ return '\u20B9' + Math.round(Math.abs(n)).toLocaleString('en-IN'); }
+function signed(n){ return (n<0?'\u2212':'+') + money(n); }
+function num(v){ var n = parseFloat(String(v).replace(/[^0-9.\-]/g,'')); return isFinite(n)?n:NaN; }
+function todayISO(){ var d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function esc(t){ return String(t).replace(/[&<>]/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]; }); }
+function toast(m){ var t=$('#toast'); t.textContent=m; t.classList.add('on'); clearTimeout(t._t); t._t=setTimeout(function(){t.classList.remove('on');},2800); }
 
-const money = n => '₹' + Math.round(n).toLocaleString('en-IN');
-const num = v => { const n = parseFloat(String(v).replace(/[^0-9.\-]/g,'')); return isFinite(n) ? n : NaN; };
-const todayISO = () => { const d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); };
-function toast(m){ const t=$('#toast'); t.textContent=m; t.classList.add('on'); clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove('on'),2600); }
+/* Zerodha equity charges. Verified against their published worked example. */
+function charges(product, buyVal, sellVal){
+  var turn = buyVal + sellVal, brok, stt, stamp, dp=0;
+  if(product==='CNC'){ brok=0; stt=turn*0.001; stamp=buyVal*0.00015; dp=15.34; }
+  else { brok=Math.min(20,buyVal*0.0003)+Math.min(20,sellVal*0.0003); stt=sellVal*0.00025; stamp=buyVal*0.00003; }
+  var exch=turn*0.0000297, sebi=turn*0.000001, gst=0.18*(brok+exch+sebi);
+  return {brok:brok,stt:stt,stamp:stamp,exch:exch,sebi:sebi,gst:gst,dp:dp,total:brok+stt+stamp+exch+sebi+gst+dp};
+}
+function roundTrip(product, qty, entry, exitP, isLong){
+  return charges(product, qty*(isLong?entry:exitP), qty*(isLong?exitP:entry));
+}
 
-/* ---------- backend ---------- */
+/* Transport. JSONP: no CORS, no preflight, no cross-origin redirect for Safari to mishandle. */
 function urlProblem(u){
   if(!u) return 'Add your Apps Script URL in settings first.';
-  try{ const x=new URL(u); if(x.hostname!=='script.google.com'||!x.pathname.endsWith('/exec')) throw 0; }
-  catch(e){ return 'The backend URL in settings is not right. It must start with https://script.google.com and end in /exec. Open settings and paste it again.'; }
+  try{ var x=new URL(u); if(x.hostname!=='script.google.com'||!/\/exec$/.test(x.pathname)) throw 0; }
+  catch(e){ return 'That backend URL is not right. It must start with https://script.google.com and end in /exec.'; }
   return '';
 }
-async function api(action, payload){
-  const bad = urlProblem(S.url); if(bad) throw new Error(bad);
-  const r = await fetch(S.url, {
-    method:'POST', redirect:'follow',
-    headers:{'Content-Type':'text/plain;charset=utf-8'},   // text/plain avoids the CORS preflight
-    body: JSON.stringify(Object.assign({action}, payload||{}))
+function api(action, payload){
+  var bad = urlProblem(S.url);
+  if(bad) return Promise.reject(new Error(bad));
+  return new Promise(function(resolve,reject){
+    var cb = 'scb' + Date.now() + Math.floor(Math.random()*1e6);
+    var el = document.createElement('script');
+    var timer = setTimeout(function(){ done(); reject(new Error('Backend did not answer in 25s. Check the deployment is live.')); }, 25000);
+    function done(){ clearTimeout(timer); try{ delete window[cb]; }catch(e){ window[cb]=undefined; } if(el.parentNode) el.parentNode.removeChild(el); }
+    window[cb] = function(r){ done(); if(r && r.ok) resolve(r.data); else reject(new Error((r&&r.error)||'Backend returned an error.')); };
+    el.onerror = function(){ done(); reject(new Error('Could not reach the backend. Re-deploy a New version with access set to Anyone.')); };
+    el.src = S.url + '?callback=' + cb + '&p=' + encodeURIComponent(JSON.stringify(Object.assign({action:action},payload||{})));
+    document.head.appendChild(el);
   });
-  const j = await r.json();
-  if(!j.ok) throw new Error(j.error || 'Backend refused that.');
-  return j.data;
 }
 
-/* ---------- the gate ---------- */
+/* The gate */
 function evaluate(){
-  const trigger=num($('#trg').value), stop=num($('#stp').value), target=num($('#tgt').value);
-  const struct=$('#struct').value, pdr=num($('#pdr').value);
-  const maxRisk = S.capital * (S.pct/100);
-  const out = {ok:false, hard:[], warn:[], trigger, stop, target, struct, maxRisk};
+  var trigger=num($('#trg').value), stop=num($('#stp').value), target=num($('#tgt').value);
+  var struct=$('#struct').value, pdr=num($('#pdr').value);
+  var cap = S.capital*(S.pct/100);
+  var o = {hard:[],warn:[],trigger:trigger,stop:stop,target:target,struct:struct,ok:false,rr:null};
 
-  if(prod==='CNC' && dir==='Short') out.hard.push('You cannot short on CNC. A delivery sell needs shares you already hold. Switch to MIS.');
-  if(!isFinite(trigger)||!isFinite(stop)||!isFinite(target)) { render(out); return out; }
+  if(prod==='CNC'&&dir==='Short') o.hard.push('You cannot short on CNC. A delivery sell needs shares you already hold. Switch to MIS.');
+  if(!isFinite(trigger)||!isFinite(stop)||!isFinite(target)){ paint(o); return o; }
 
-  const risk   = dir==='Long' ? trigger-stop : stop-trigger;
-  const reward = dir==='Long' ? target-trigger : trigger-target;
-  out.risk=risk; out.reward=reward;
+  var isLong = dir==='Long';
+  var risk = isLong ? trigger-stop : stop-trigger;
+  var rew  = isLong ? target-trigger : trigger-target;
+  o.risk=risk; o.reward=rew;
+  if(risk<=0) o.hard.push(isLong?'Stop is above the trigger on a long. That is a short.':'Stop is below the trigger on a short. That is a long.');
+  if(rew<=0)  o.hard.push(isLong?'Target is below the trigger on a long.':'Target is above the trigger on a short.');
+  if(risk<=0||rew<=0){ paint(o); return o; }
 
-  if(risk<=0)   out.hard.push(dir==='Long' ? 'Stop is above the trigger on a long. That is a short.' : 'Stop is below the trigger on a short. That is a long.');
-  if(reward<=0) out.hard.push(dir==='Long' ? 'Target is below the trigger on a long.' : 'Target is above the trigger on a short.');
-  if(risk<=0||reward<=0){ render(out); return out; }
+  var rr = rew/risk;
+  var power = prod==='MIS' ? S.capital*S.lev : S.capital;
+  var byRisk = Math.floor(cap/risk), byCash = Math.floor(power/trigger);
 
-  const rr = reward/risk;
-  let qty = Math.floor(maxRisk/risk);
-  const power = prod==='MIS' ? S.capital*S.lev : S.capital;
-  let capped=false;
-  if(qty*trigger > power){ qty = Math.floor(power/trigger); capped=true; }
-  const atRisk = qty*risk;
-  Object.assign(out,{rr,qty,atRisk,notional:qty*trigger});
-
-  if(qty<1) out.hard.push('One share risks ' + money(risk) + ', more than your ' + money(maxRisk) + ' daily cap. This trade cannot be sized.');
-  if(rr < S.minRR) out.warn.push('R:R is ' + rr.toFixed(2) + ', under your ' + S.minRR + ':1 rule. Move the stop or the target, or skip it.');
-  if(!struct) out.warn.push('Name what the target sits on. If you cannot, it is a guess.');
-  if(struct==='None') out.warn.push('The target has no level behind it. This is the single commonest reason a target never gets hit.');
-  if(capped) out.warn.push('Capital capped the size to ' + qty + '. You are risking ' + money(atRisk) + ' instead of ' + money(maxRisk) + '.');
-  if(isFinite(pdr) && pdr>0 && risk < pdr*0.25) out.warn.push('Your stop is ' + Math.round(risk/pdr*100) + '% of yesterday\u2019s range. Noise will take you out before the idea is wrong.');
-  const used = TODAY.reduce((a,t)=>a+(t.risk||0),0);
-  if(used>0) out.warn.push('You have already put ' + money(used) + ' at risk today.');
-
-  out.ok = out.hard.length===0;
-  render(out);
-  return out;
-}
-
-function render(o){
-  const g=$('#gate');
-  g.classList.remove('p','w','f');
-  if(o.hard.length){ g.classList.add('f'); $('#rrNum').innerHTML='✕<small>fix this first</small>'; }
-  else if(o.rr==null){ $('#rrNum').innerHTML='—<small>reward to risk</small>'; }
-  else {
-    g.classList.add(o.rr>=S.minRR?'p':(o.rr>=1?'w':'f'));
-    $('#rrNum').innerHTML = o.rr.toFixed(2)+'<small>reward to risk</small>';
+  /* Size against the all-in loss, not the bare stop, so the daily cap holds in reality. */
+  var qty = 0;
+  for(var q=Math.min(byRisk,byCash); q>=1; q--){
+    if(q*risk + roundTrip(prod,q,trigger,stop,isLong).total <= cap){ qty=q; break; }
   }
-  const tot = (o.risk>0&&o.reward>0) ? o.risk+o.reward : 0;
-  $('#barR').style.width = tot ? (o.risk/tot*100)+'%' : '0';
-  $('#barW').style.width = tot ? (o.reward/tot*100)+'%' : '0';
-  $('#sQty').textContent  = o.qty!=null ? o.qty : '—';
-  $('#sRisk').textContent = o.atRisk!=null ? money(o.atRisk) : '—';
-  $('#sNot').textContent  = o.notional!=null ? money(o.notional) : '—';
-  $('#flags').innerHTML = o.hard.map(t=>'<li class="f">'+t+'</li>').join('')
-                        + o.warn.map(t=>'<li class="w">'+t+'</li>').join('');
+  if(!qty){
+    var one = 1*risk + roundTrip(prod,1,trigger,stop,isLong).total;
+    o.hard.push('Even one share loses ' + money(one) + ' after charges, past your ' + money(cap) + ' cap. This cannot be sized.');
+    paint(o); return o;
+  }
+  var capped = byCash < byRisk;
+  var lossC = roundTrip(prod,qty,trigger,stop,isLong).total;
+  var winC  = roundTrip(prod,qty,trigger,target,isLong).total;
+  o.rr=rr; o.qty=qty; o.worst=qty*risk+lossC; o.best=qty*rew-winC; o.notional=qty*trigger;
+
+  if(rr < S.minRR) o.warn.push('R:R is ' + rr.toFixed(2) + ', under your ' + S.minRR + ':1 rule. Move the stop or the target, or skip it.');
+  if(!struct) o.warn.push('Name what the target sits on. If you cannot, it is a guess.');
+  if(struct==='None') o.warn.push('The target has no level behind it. This is the commonest reason a target never gets hit.');
+  if(capped) o.warn.push('Capital limited the size to ' + qty + ' shares.');
+  if(isFinite(pdr)&&pdr>0&&risk<pdr*0.25) o.warn.push('Your stop is ' + Math.round(risk/pdr*100) + '% of yesterday\u2019s range. Noise will take you out before the idea is wrong.');
+  if(lossC > qty*risk*0.06) o.warn.push('Charges of ' + money(lossC) + ' make the real loss ' + money(o.worst) + '. The bare stop understates it.');
+  var used = TODAY.reduce(function(a,t){ return a+(t.risk||0); },0);
+  if(used>0) o.warn.push('You have already committed ' + money(used) + ' today.');
+
+  o.ok = !o.hard.length;
+  paint(o); return o;
+}
+function paint(o){
+  var g=$('#gate'); g.classList.remove('p','w','f');
+  if(o.hard.length){ g.classList.add('f'); $('#rrNum').innerHTML='\u2715<small>fix this first</small>'; }
+  else if(o.rr==null){ $('#rrNum').innerHTML='&mdash;<small>reward to risk</small>'; }
+  else { g.classList.add(o.rr>=S.minRR?'p':(o.rr>=1?'w':'f')); $('#rrNum').innerHTML=o.rr.toFixed(2)+'<small>reward to risk</small>'; }
+  var tot=(o.risk>0&&o.reward>0)?o.risk+o.reward:0;
+  $('#barR').style.width = tot?(o.risk/tot*100)+'%':'0';
+  $('#barW').style.width = tot?(o.reward/tot*100)+'%':'0';
+  $('#sRisk').textContent = o.worst!=null?money(o.worst):'\u2014';
+  $('#sWin').textContent  = o.best!=null?money(o.best):'\u2014';
+  $('#sNot').textContent  = o.notional!=null?money(o.notional):'\u2014';
+  $('#sQty').textContent  = o.qty!=null?o.qty:'\u2014';
+  $('#sQtyT').innerHTML   = o.qty!=null ? 'shares to trade<br>on ' + money(S.capital) + ' capital' : 'enter the levels<br>to size the trade';
+  $('#flags').innerHTML = o.hard.map(function(t){return '<li class="f">'+t+'</li>';}).join('')
+                        + o.warn.map(function(t){return '<li class="w">'+t+'</li>';}).join('');
   $('#save').disabled = !o.ok;
-  $('#save').textContent = o.warn.length && o.ok ? 'Save anyway, with a reason' : 'Save setup';
 }
 
-/* ---------- plan ---------- */
-async function saveSetup(){
-  const o = evaluate();
-  if(!o.ok) return;
-  const tk = $('#tk').value.trim().toUpperCase();
+/* Plan */
+function saveSetup(){
+  var o = evaluate(); if(!o.ok) return;
+  var tk = $('#tk').value.trim().toUpperCase();
   if(!tk) return toast('Which stock.');
-  let override = '';
+  var override='';
   if(o.warn.length){
-    override = prompt('You are overriding ' + o.warn.length + ' warning' + (o.warn.length>1?'s':'') + '. Why is this trade still worth taking?') || '';
+    override = prompt('Overriding ' + o.warn.length + ' warning' + (o.warn.length>1?'s':'') + '. Why is this still worth taking?')||'';
     if(!override.trim()) return toast('No reason, no save.');
   }
-  $('#save').disabled=true; $('#save').textContent='Saving…';
-  try{
-    await api('saveSetup',{ticker:tk,direction:dir,product:prod,trigger:o.trigger,stop:o.stop,target:o.target,
+  var btn=$('#save'); btn.disabled=true; btn.innerHTML='<span class="spin"></span>Saving ' + tk + '\u2026';
+  api('saveSetup',{ticker:tk,direction:dir,product:prod,trigger:o.trigger,stop:o.stop,target:o.target,
       rr:+o.rr.toFixed(2),qty:o.qty,structure:o.struct,prevRange:num($('#pdr').value)||'',
-      note:$('#note').value.trim(),override});
-    toast(tk + ' saved to the week.');
-    resetForm(); await loadWeek();
-  }catch(e){ toast(e.message); }
-  $('#save').disabled=false; $('#save').textContent='Save setup';
+      note:$('#note').value.trim(),override:override})
+  .then(function(){
+    btn.textContent='Saved \u2713';
+    toast(tk + ' saved as Pending. Confirm it after the review.');
+    resetForm();
+    setTimeout(function(){ btn.textContent='Save setup'; evaluate(); },1000);
+    return loadWeek();
+  })
+  .catch(function(e){ toast(e.message); btn.textContent='Save setup'; btn.disabled=false; });
 }
 function resetForm(){
-  ['#tk','#trg','#stp','#tgt','#pdr','#note'].forEach(s=>$(s).value='');
+  ['#tk','#trg','#stp','#tgt','#pdr','#note'].forEach(function(s){ $(s).value=''; });
   $('#struct').value='';
-  if(document.activeElement && document.activeElement.blur) document.activeElement.blur(); // iOS keyboard
-  evaluate();
+  if(document.activeElement&&document.activeElement.blur) document.activeElement.blur();
 }
-
-async function loadWeek(){
-  try{ WEEK = await api('getWeek'); }
-  catch(e){
-    const m='<p class="empty">'+e.message+'</p>';
-    $('#weekList').innerHTML=m; $('#todayList').innerHTML=m;
-    $('#lgSel').innerHTML='<option value="">Backend not reachable</option>';
-    return;
-  }
-  loadPrep();
-  TODAY = WEEK.filter(s=>s.status==='Taken' && s.takenOn===todayISO());
-  drawWeek(); drawToday(); drawLogPicker();
+function loadWeek(){
+  return api('getWeek').then(function(w){
+    WEEK = w || [];
+    TODAY = WEEK.filter(function(s){ return s.status==='Taken'&&s.takenOn===todayISO(); });
+    drawWeek(); drawToday(); drawLogPicker();
+    $('#sub').textContent = WEEK.length + ' planned, ' + WEEK.filter(function(s){return s.confirmed;}).length + ' confirmed';
+    api('getPrep').then(function(p){ PREP=p; drawToday(); }).catch(function(){});
+  }).catch(function(e){
+    WEEK=[];
+    var m='<p class="empty">'+esc(e.message)+'</p>';
+    $('#weekList').innerHTML=m; $('#todayList').innerHTML=m; $('#mktBox').innerHTML='';
+    $('#lgSel').innerHTML='<option value="">'+esc(e.message)+'</option>';
+  });
 }
-async function loadPrep(){
-  try{ PREP = await api('getPrep'); }catch(e){ PREP=null; }
-  drawToday();
-}
-function esc(t){ return String(t).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])); }
-function prepFor(tk){
-  if(!PREP||!PREP.text) return '';
-  const lines = PREP.text.split('\n').filter(l=>l.toUpperCase().includes(tk));
-  if(!lines.length) return '';
-  return '<div class="prep">'+lines.slice(0,6).map(l=>esc(l.trim())).join('\n')+'</div>';
-}
-function card(s, acts, withPrep){
-  const d = s.direction==='Long'?'L':'S';
+function card(s, acts, prep){
+  var d = s.direction==='Long'?'L':'S';
   return '<div class="card' + (s.status==='Dead'||s.status==='Gapped'?' dim':'') + '" data-tk="'+s.ticker+'">'
-   + '<h3>'+s.ticker+' <span class="tag '+d+'">'+s.direction+' · '+(s.rr||'—')+':1</span></h3>'
-   + '<div class="lv">In '+s.trigger+' · stop '+s.stop+' · target '+s.target+' · '+(s.qty||'?')+' sh'
-   + (s.structure?' · '+s.structure:'') + (s.status&&s.status!=='Planned'?' · '+s.status:'') + '</div>'
-   + (acts?'<div class="acts">'+acts+'</div>':'') + (withPrep?prepFor(s.ticker):'') + '</div>';
+   + '<h3><span>'+s.ticker+'<span class="pill'+(s.confirmed?' ok':'')+'">'+(s.confirmed?'Confirmed':'Pending')+'</span></span>'
+   + '<span class="tag '+d+'">'+s.direction+' '+(s.rr||'\u2014')+':1</span></h3>'
+   + '<div class="lv">In '+s.trigger+' \u00B7 stop '+s.stop+' \u00B7 target '+s.target+' \u00B7 <b>'+(s.qty||'?')+' sh</b>'
+   + (s.structure?' \u00B7 '+esc(s.structure):'') + (s.status&&s.status!=='Planned'?' \u00B7 '+s.status:'') + '</div>'
+   + (acts?'<div class="acts">'+acts+'</div>':'')
+   + (prep&&PREP&&PREP.tickers&&PREP.tickers[s.ticker] ? '<div class="prep">'+esc(PREP.tickers[s.ticker])+'</div>' : '')
+   + '</div>';
 }
 function drawWeek(){
   $('#weekList').innerHTML = WEEK.length
-    ? WEEK.map(s=>card(s,'<button data-act="del">Remove</button>')).join('')
-    : '<p class="empty">Nothing planned yet. Add your first setup above.</p>';
+    ? WEEK.map(function(s){ return card(s,'<button data-act="conf" class="'+(s.confirmed?'ok':'')+'">'+(s.confirmed?'\u2713 Confirmed':'Confirm')+'</button><button data-act="del">Remove</button>'); }).join('')
+    : '<p class="empty">Nothing planned yet.</p>';
 }
 function drawToday(){
-  const live = WEEK.filter(s=>!s.status||s.status==='Planned');
-  const used = TODAY.reduce((a,t)=>a+(t.risk||0),0);
-  const max = S.capital*(S.pct/100);
-  $('#bLeft').textContent = money(Math.max(0,max-used));
-  $('#bMeter').style.width = Math.min(100, used/max*100)+'%';
+  var live = WEEK.filter(function(s){ return s.confirmed && (!s.status||s.status==='Planned'); });
+  var used = TODAY.reduce(function(a,t){ return a+(t.risk||0); },0), cap = S.capital*(S.pct/100);
+  $('#bLeft').textContent = money(Math.max(0,cap-used));
+  $('#bMeter').style.width = Math.min(100,used/cap*100)+'%';
   $('#bNote').textContent = TODAY.length
-    ? TODAY.length+' trade'+(TODAY.length>1?'s':'')+' taken today. A second one needs high conviction and a written reason.'
+    ? TODAY.length+' trade'+(TODAY.length>1?'s':'')+' taken today. A second needs high conviction and a written reason.'
     : 'No trade yet today. One is the limit.';
-  $('#todayList').innerHTML = (live.length
-    ? live.map(s=>card(s,'<button data-act="take">Taken</button><button data-act="gap">Gapped past</button><button data-act="dead">Skip today</button>',true)).join('')
-    : '<p class="empty">No live setups. Plan them on Sunday.</p>')
-    + (PREP&&PREP.text
-        ? '<details class="prepAll"><summary>'+esc(PREP.title)+'</summary><div class="prep">'+esc(PREP.text)+'</div></details>'
-        : '<p class="empty" style="margin-top:8px">No week prep doc yet. It appears here after the Sunday task runs.</p>');
+  $('#mktBox').innerHTML = (PREP&&PREP.market)
+    ? '<details class="mkt" open><summary>Market overview \u00B7 '+esc(PREP.title||'week prep')+'</summary><div class="prep">'+esc(PREP.market)+'</div></details>'
+    : '<p class="empty">Week prep lands here after the Monday 2am task runs.</p>';
+  var pend = WEEK.filter(function(s){ return !s.confirmed; }).length;
+  $('#todayList').innerHTML = live.length
+    ? live.map(function(s){ return card(s,'<button data-act="take">Taken</button><button data-act="gap">Gapped past</button><button data-act="dead">Skip today</button>',true); }).join('')
+    : '<p class="empty">Nothing confirmed'+(pend?'. '+pend+' setup'+(pend>1?'s are':' is')+' still pending review on the Plan tab.':' yet.')+'</p>';
 }
-async function act(tk, a){
-  if(a==='take' && TODAY.length>=1){
-    const why = prompt('You already traded today. What makes this one high conviction?');
-    if(!why || !why.trim()) return toast('Second trade blocked.');
+function act(tk,a){
+  if(a==='take'&&TODAY.length>=1){
+    var why=prompt('You already traded today. What makes this one high conviction?');
+    if(!why||!why.trim()) return toast('Second trade blocked.');
   }
-  const map={take:'Taken',gap:'Gapped',dead:'Dead',del:'Removed'};
-  try{
-    await api('setStatus',{ticker:tk,status:map[a],on:todayISO()});
-    toast(tk+' marked '+map[a].toLowerCase()+'.'); await loadWeek();
-  }catch(e){ toast(e.message); }
+  if(a==='conf'){
+    var s=WEEK.filter(function(x){return x.ticker===tk;})[0];
+    return api('confirm',{ticker:tk,on:s.confirmed?'N':'Y'})
+      .then(function(){ toast(tk+(s.confirmed?' back to pending.':' confirmed. It is now on Today.')); return loadWeek(); })
+      .catch(function(e){ toast(e.message); });
+  }
+  var map={take:'Taken',gap:'Gapped',dead:'Dead',del:'Removed'};
+  return api('setStatus',{ticker:tk,status:map[a],on:todayISO()})
+    .then(function(){ toast(tk+' marked '+map[a].toLowerCase()+'.'); return loadWeek(); })
+    .catch(function(e){ toast(e.message); });
 }
-document.addEventListener('click', e=>{
-  const b = e.target.closest('.acts button'); if(!b) return;
+document.addEventListener('click',function(e){
+  var b=e.target.closest('.acts button'); if(!b) return;
   act(b.closest('.card').dataset.tk, b.dataset.act);
 });
 
-/* ---------- log ---------- */
+/* Log */
 function drawLogPicker(){
-  const t = WEEK.filter(s=>s.status==='Taken');
-  $('#lgSel').innerHTML = t.length ? t.map(s=>'<option value="'+s.ticker+'">'+s.ticker+' '+s.direction+'</option>').join('')
-    : '<option value="">Mark a setup as taken on the Today tab first</option>';
-  $('#breaches').innerHTML = BREACH.map((b,i)=>'<label class="chk"><input type="checkbox" value="'+b+'" id="br'+i+'"><span>'+b+'</span></label>').join('');
-  calcResult();
+  var t = WEEK.filter(function(s){ return s.status==='Taken'; });
+  $('#lgSel').innerHTML = t.length
+    ? t.map(function(s){ return '<option value="'+s.ticker+'">'+s.ticker+' '+s.direction+'</option>'; }).join('')
+    : '<option value="">Mark a setup Taken on the Today tab first</option>';
+  $('#breaches').innerHTML = BREACH.map(function(b,i){ return '<label class="chk"><input type="checkbox" value="'+b+'" id="br'+i+'"><span>'+b+'</span></label>'; }).join('');
+  syncQty(); calcResult();
+}
+function syncQty(){
+  var s=WEEK.filter(function(x){return x.ticker===$('#lgSel').value;})[0];
+  if(s&&!$('#lgQty').value) $('#lgQty').value=s.qty||'';
 }
 function calcResult(){
-  const s = WEEK.find(x=>x.ticker===$('#lgSel').value);
-  const en=num($('#lgEntry').value), ex=num($('#lgExit').value);
-  const g=$('#resGate'); g.classList.remove('p','w','f');
-  if(!s||!isFinite(en)||!isFinite(ex)){ $('#resPnl').innerHTML='—<small>profit and loss</small>'; $('#resR').textContent='—'; $('#resPlan').textContent = s?(s.rr||'—'):'—'; return; }
-  const per = s.direction==='Long' ? ex-en : en-ex;
-  const pnl = per*(s.qty||0);
-  const risk = Math.abs(s.trigger-s.stop);
-  g.classList.add(pnl>0?'p':(pnl<0?'f':'w'));
-  $('#resPnl').innerHTML = (pnl>=0?'+':'−')+money(Math.abs(pnl))+'<small>profit and loss</small>';
-  $('#resR').textContent = risk? (per/risk).toFixed(2)+'R' : '—';
-  $('#resPlan').textContent = (s.rr||'—')+'R';
+  var s=WEEK.filter(function(x){return x.ticker===$('#lgSel').value;})[0];
+  var q=num($('#lgQty').value), en=num($('#lgEntry').value), ex=num($('#lgExit').value);
+  var g=$('#resGate'); g.classList.remove('p','w','f');
+  if(!s||!isFinite(q)||!isFinite(en)||!isFinite(ex)||q<1){
+    $('#resPnl').innerHTML='&mdash;<small>net after charges</small>';
+    ['#resGross','#resCost','#resR'].forEach(function(x){ $(x).textContent='\u2014'; });
+    $('#costTbl').innerHTML=''; return;
+  }
+  var isLong=s.direction==='Long';
+  var per=isLong?ex-en:en-ex, gross=per*q;
+  var c=roundTrip(s.product||'MIS',q,en,ex,isLong);
+  var net=gross-c.total, risk=Math.abs(s.trigger-s.stop);
+  g.classList.add(net>0?'p':(net<0?'f':'w'));
+  $('#resPnl').innerHTML=signed(net)+'<small>net after charges</small>';
+  $('#resGross').textContent=signed(gross);
+  $('#resCost').textContent='\u2212'+money(c.total);
+  $('#resR').textContent=risk?(per/risk).toFixed(2)+'R':'\u2014';
+  var rows=[['Brokerage',c.brok],['STT',c.stt],['Exchange',c.exch],['SEBI',c.sebi],['Stamp duty',c.stamp],['GST',c.gst]];
+  if(c.dp) rows.push(['DP charge',c.dp]);
+  $('#costTbl').innerHTML = rows.map(function(r){ return '<tr><td>'+r[0]+'</td><td>\u20B9'+r[1].toFixed(2)+'</td></tr>'; }).join('')
+    + '<tr class="tot"><td>Total charges</td><td>\u20B9'+c.total.toFixed(2)+'</td></tr>';
 }
-async function logTrade(){
-  const s = WEEK.find(x=>x.ticker===$('#lgSel').value);
+function logTrade(){
+  var s=WEEK.filter(function(x){return x.ticker===$('#lgSel').value;})[0];
   if(!s) return toast('Pick a setup.');
-  const en=num($('#lgEntry').value), ex=num($('#lgExit').value);
-  if(!isFinite(en)||!isFinite(ex)) return toast('Both fills, please.');
-  const br = BREACH.filter((b,i)=>$('#br'+i).checked);
-  const per = s.direction==='Long'?ex-en:en-ex, risk=Math.abs(s.trigger-s.stop);
-  $('#lgSave').disabled=true;
-  try{
-    await api('logTrade',{date:todayISO(),ticker:s.ticker,direction:s.direction,trigger:s.trigger,stop:s.stop,
-      target:s.target,plannedRR:s.rr,qty:s.qty,plannedRisk:Math.round(risk*(s.qty||0)),entry:en,exit:ex,
-      why:$('#lgWhy').value,pnl:Math.round(per*(s.qty||0)),actualR:risk?+(per/risk).toFixed(2):'',
-      breaches:br.join('; '),note:$('#lgNote').value.trim()});
-    toast('Logged.');
-    $('#lgEntry').value=$('#lgExit').value=$('#lgNote').value='';
-    br.forEach(()=>{}); BREACH.forEach((b,i)=>$('#br'+i).checked=false);
-    if(document.activeElement && document.activeElement.blur) document.activeElement.blur();
+  var q=num($('#lgQty').value), en=num($('#lgEntry').value), ex=num($('#lgExit').value);
+  if(!isFinite(q)||q<1) return toast('Quantity, please.');
+  if(!isFinite(en)||!isFinite(ex)) return toast('Both prices, please.');
+  var isLong=s.direction==='Long', per=isLong?ex-en:en-ex, gross=per*q;
+  var c=roundTrip(s.product||'MIS',q,en,ex,isLong), risk=Math.abs(s.trigger-s.stop);
+  var br=BREACH.filter(function(b,i){ return $('#br'+i).checked; });
+  var btn=$('#lgSave'); btn.disabled=true; btn.innerHTML='<span class="spin"></span>Logging\u2026';
+  api('logTrade',{date:todayISO(),ticker:s.ticker,direction:s.direction,product:s.product||'MIS',
+      trigger:s.trigger,stop:s.stop,target:s.target,plannedRR:s.rr,qty:q,plannedRisk:Math.round(risk*q),
+      entry:en,exit:ex,why:$('#lgWhy').value,gross:+gross.toFixed(2),charges:+c.total.toFixed(2),
+      net:+(gross-c.total).toFixed(2),actualR:risk?+(per/risk).toFixed(2):'',
+      breaches:br.join('; '),note:$('#lgNote').value.trim()})
+  .then(function(){
+    toast('Logged. Net ' + signed(gross-c.total) + '.');
+    ['#lgQty','#lgEntry','#lgExit','#lgNote'].forEach(function(x){ $(x).value=''; });
+    BREACH.forEach(function(b,i){ $('#br'+i).checked=false; });
+    if(document.activeElement&&document.activeElement.blur) document.activeElement.blur();
     calcResult(); loadScore();
-  }catch(e){ toast(e.message); }
-  $('#lgSave').disabled=false;
+  })
+  .catch(function(e){ toast(e.message); })
+  .then(function(){ btn.disabled=false; btn.textContent='Log trade'; });
 }
-async function loadScore(){
-  try{ SCORE = await api('score'); }catch(e){ return; }
-  $('#scorecard').innerHTML =
-    '<div class="card"><h3>'+SCORE.breaches+' rule breaks</h3><div class="lv">Across '+SCORE.trades+' trades. This is the number that matters right now, not the money.</div></div>'
-   +'<div class="card"><h3>'+SCORE.wins+' of '+SCORE.trades+' hit target</h3><div class="lv">Average '+SCORE.avgR+'R per trade · net '+money(SCORE.pnl)+'</div></div>';
+function loadScore(){
+  return api('score').then(function(d){
+    var cls = d.net>0?'p':(d.net<0?'f':'w');
+    $('#scorecard').innerHTML =
+      '<div class="gate '+cls+'"><div class="num">'+signed(d.net)+'<small>net profit and loss, all time</small></div>'
+      +'<div class="stats"><div><b>'+d.trades+'</b><span>Trades</span></div>'
+      +'<div><b>'+d.wins+'</b><span>Targets hit</span></div>'
+      +'<div><b>'+d.avgR+'R</b><span>Average</span></div></div></div>'
+      +'<div class="card"><h3>'+d.breaches+' rule breaks in 30 days</h3>'
+      +'<div class="lv">Gross '+signed(d.gross)+', charges \u2212'+money(d.charges)+'. For now this count matters more than the money.</div></div>';
+  }).catch(function(e){ $('#scorecard').innerHTML='<p class="empty">'+esc(e.message)+'</p>'; });
 }
 
-/* ---------- lock ---------- */
-const b64u = b => btoa(String.fromCharCode(...new Uint8Array(b))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
-const unb64 = s => { s=s.replace(/-/g,'+').replace(/_/g,'/'); const r=atob(s),a=new Uint8Array(r.length); for(let i=0;i<r.length;i++)a[i]=r.charCodeAt(i); return a; };
+/* Lock */
+function b64u(b){ return btoa(String.fromCharCode.apply(null,new Uint8Array(b))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,''); }
+function unb64(s){ s=s.replace(/-/g,'+').replace(/_/g,'/'); var r=atob(s),a=new Uint8Array(r.length); for(var i=0;i<r.length;i++)a[i]=r.charCodeAt(i); return a; }
 function lock(){ $('#lock').classList.remove('hide'); }
-function unlock(){ $('#lock').classList.add('hide'); $('#lockErr').textContent=''; $('#pinIn').value=''; loadWeek(); loadScore(); go(localStorage.getItem('setups.seen')?'plan':'guide'); localStorage.setItem('setups.seen','1'); }
-
-async function bioRegister(){
-  try{
-    const c = await navigator.credentials.create({publicKey:{
-      challenge:crypto.getRandomValues(new Uint8Array(32)),
-      rp:{name:'Setups'}, user:{id:crypto.getRandomValues(new Uint8Array(16)),name:'trader',displayName:'Trader'},
-      pubKeyCredParams:[{type:'public-key',alg:-7},{type:'public-key',alg:-257}],
-      authenticatorSelection:{authenticatorAttachment:'platform',userVerification:'required'},
-      timeout:60000, attestation:'none'}});
-    localStorage.setItem('setups.cred', b64u(c.rawId));
-    toast('Face ID is on for this phone.');
-  }catch(e){ toast('Face ID setup did not complete.'); }
+function unlock(){
+  $('#lock').classList.add('hide'); $('#lockErr').textContent=''; $('#pinIn').value='';
+  loadWeek(); loadScore();
+  go(localStorage.getItem('setups.seen')?'plan':'guide');
+  localStorage.setItem('setups.seen','1');
 }
-async function bioUnlock(){
-  const id = localStorage.getItem('setups.cred');
-  if(!id) return $('#lockErr').textContent = 'Face ID is not set up yet. Use your PIN, then turn it on in settings.';
-  try{
-    await navigator.credentials.get({publicKey:{challenge:crypto.getRandomValues(new Uint8Array(32)),
-      allowCredentials:[{type:'public-key',id:unb64(id),transports:['internal']}],userVerification:'required',timeout:60000}});
-    unlock();
-  }catch(e){ $('#lockErr').textContent='Face ID did not match. Try your PIN.'; }
+function bioRegister(){
+  navigator.credentials.create({publicKey:{challenge:crypto.getRandomValues(new Uint8Array(32)),
+    rp:{name:'Setups'},user:{id:crypto.getRandomValues(new Uint8Array(16)),name:'trader',displayName:'Trader'},
+    pubKeyCredParams:[{type:'public-key',alg:-7},{type:'public-key',alg:-257}],
+    authenticatorSelection:{authenticatorAttachment:'platform',userVerification:'required'},timeout:60000,attestation:'none'}})
+  .then(function(c){ localStorage.setItem('setups.cred',b64u(c.rawId)); toast('Face ID is on for this phone.'); })
+  .catch(function(){ toast('Face ID setup did not complete.'); });
+}
+function bioUnlock(){
+  var id=localStorage.getItem('setups.cred');
+  if(!id){ $('#lockErr').textContent='Face ID is not set up yet. Use your PIN, then turn it on in settings.'; return; }
+  navigator.credentials.get({publicKey:{challenge:crypto.getRandomValues(new Uint8Array(32)),
+    allowCredentials:[{type:'public-key',id:unb64(id),transports:['internal']}],userVerification:'required',timeout:60000}})
+  .then(unlock).catch(function(){ $('#lockErr').textContent='Face ID did not match. Try your PIN.'; });
 }
 
-/* ---------- wiring ---------- */
-$('#n50').innerHTML = N50.map(t=>'<option value="'+t+'">').join('');
-['#trg','#stp','#tgt','#pdr'].forEach(s=>$(s).addEventListener('input',evaluate));
+/* Wiring */
+$('#n50').innerHTML = N50.map(function(t){ return '<option value="'+t+'">'; }).join('');
+['#trg','#stp','#tgt','#pdr'].forEach(function(s){ $(s).addEventListener('input',evaluate); });
 $('#struct').addEventListener('change',evaluate);
-$('#dir').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
-  dir=b.dataset.v;[...e.currentTarget.children].forEach(x=>x.setAttribute('aria-pressed',x===b));evaluate();});
-$('#prod').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
-  prod=b.dataset.v;[...e.currentTarget.children].forEach(x=>x.setAttribute('aria-pressed',x===b));evaluate();});
-$('#save').onclick=saveSetup; $('#reset').onclick=resetForm;
-$('#lgSel').onchange=calcResult; $('#lgEntry').oninput=calcResult; $('#lgExit').oninput=calcResult;
+$('#dir').addEventListener('click',function(e){ var b=e.target.closest('button'); if(!b)return; dir=b.dataset.v;
+  Array.prototype.forEach.call(e.currentTarget.children,function(x){ x.setAttribute('aria-pressed',x===b); }); evaluate(); });
+$('#prod').addEventListener('click',function(e){ var b=e.target.closest('button'); if(!b)return; prod=b.dataset.v;
+  Array.prototype.forEach.call(e.currentTarget.children,function(x){ x.setAttribute('aria-pressed',x===b); }); evaluate(); });
+$('#save').onclick=saveSetup;
+$('#reset').onclick=function(){ resetForm(); evaluate(); };
+$('#lgSel').onchange=function(){ $('#lgQty').value=''; syncQty(); calcResult(); };
+['#lgQty','#lgEntry','#lgExit'].forEach(function(s){ $(s).addEventListener('input',calcResult); });
 $('#lgSave').onclick=logTrade;
 $('#bioBtn').onclick=bioUnlock; $('#bioReg').onclick=bioRegister;
-$('#pinBtn').onclick=()=>{
-  if(!S.pin){ unlock(); go('set'); toast('No PIN yet. Set one here.'); return; }  // first run
+$('#pinBtn').onclick=function(){
+  if(!S.pin){ unlock(); go('set'); toast('No PIN yet. Set one here.'); return; }
   if($('#pinIn').value===S.pin) unlock(); else $('#lockErr').textContent='Wrong PIN.';
 };
-$('#pinIn').addEventListener('keydown',e=>{if(e.key==='Enter')$('#pinBtn').click();});
+$('#pinIn').addEventListener('keydown',function(e){ if(e.key==='Enter') $('#pinBtn').click(); });
 
-const TITLES={guide:'Guide',plan:'Plan',today:'Today',log:'Log',set:'Settings'};
+var TITLES={guide:'Guide',plan:'Plan',today:'Today',log:'Log',set:'Settings'};
 function go(p){
-  document.querySelectorAll('.page').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('.page').forEach(function(x){ x.classList.remove('on'); });
   $('#p-'+p).classList.add('on');
-  document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.p===p));
-  $('#ttl').textContent=TITLES[p];
-  $('#sub').textContent = p==='plan' ? WEEK.length+' this week' : '';
-  window.scrollTo(0,0);
+  document.querySelectorAll('nav button').forEach(function(b){ b.classList.toggle('on',b.dataset.p===p); });
+  $('#ttl').textContent=TITLES[p]; window.scrollTo(0,0);
 }
-document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>go(b.dataset.p));
-$('#gear').onclick=()=>{
+document.querySelectorAll('nav button').forEach(function(b){ b.onclick=function(){ go(b.dataset.p); }; });
+$('#gear').onclick=function(){
   $('#stUrl').value=S.url; $('#stCap').value=S.capital; $('#stPct').value=S.pct;
-  $('#stLev').value=S.lev; $('#stRR').value=S.minRR; $('#stPin').value=S.pin; go('set'); };
-$('#stTest').onclick=async()=>{
-  const u=$('#stUrl').value.trim(); const bad=urlProblem(u); if(bad) return toast(bad);
-  try{ const r=await fetch(u,{redirect:'follow'}); const j=await r.json(); toast(j.ok?'Backend answered. You are connected.':'Backend answered but not as expected.'); }
-  catch(e){ toast('No answer. Check the deployment is set to Anyone.'); }
+  $('#stLev').value=S.lev; $('#stRR').value=S.minRR; $('#stPin').value=S.pin; go('set');
 };
-$('#stSave').onclick=()=>{
-  const u=$('#stUrl').value.trim(); const bad=urlProblem(u); if(bad) return toast(bad);
+$('#stTest').onclick=function(){
+  var u=$('#stUrl').value.trim(), bad=urlProblem(u); if(bad) return toast(bad);
+  var old=S.url; S.url=u; $('#stTest').innerHTML='<span class="spin"></span>Testing\u2026';
+  api('ping').then(function(){ toast('Backend answered. You are connected.'); })
+  .catch(function(e){ toast(e.message); S.url=old; })
+  .then(function(){ $('#stTest').textContent='Test connection'; });
+};
+$('#stSave').onclick=function(){
+  var u=$('#stUrl').value.trim(), bad=urlProblem(u); if(bad) return toast(bad);
   S.url=u; S.capital=num($('#stCap').value)||50000; S.pct=num($('#stPct').value)||1;
   S.lev=num($('#stLev').value)||5; S.minRR=num($('#stRR').value)||2; S.pin=$('#stPin').value.trim();
-  saveCfg(); toast('Settings saved.'); evaluate(); loadWeek(); go('plan');
+  saveCfg(); toast('Settings saved.'); evaluate(); loadWeek(); loadScore(); go('plan');
 };
-$('#wipeWeek').onclick=async()=>{ if(!confirm('Clear every setup for the week?'))return;
-  try{ await api('clearWeek'); toast('Week cleared.'); loadWeek(); }catch(e){ toast(e.message); } };
+$('#wipeWeek').onclick=function(){
+  if(!confirm('Clear every setup for the week?')) return;
+  api('clearWeek').then(function(){ toast('Week cleared.'); return loadWeek(); }).catch(function(e){ toast(e.message); });
+};
 
-let bg=0;
-document.addEventListener('visibilitychange',()=>{
+var bg=0;
+document.addEventListener('visibilitychange',function(){
   if(document.hidden) bg=Date.now();
-  else if(bg && Date.now()-bg>60000) lock();
+  else if(bg&&Date.now()-bg>60000) lock();
 });
-if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
-if(!S.pin && !localStorage.getItem('setups.cred')){
+if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(function(){});
+if(!S.pin&&!localStorage.getItem('setups.cred')){
   $('#lockSub').textContent='First run. Tap Unlock with PIN, leave the box empty.';
   $('#bioBtn').classList.add('hide');
 }
