@@ -1,5 +1,5 @@
 // Bump CACHE on every deploy or the phone keeps serving the old shell.
-const CACHE = 'setups-v3';
+const CACHE = 'setups-v4';
 const SHELL = ['index.html', 'manifest.json'];
 
 self.addEventListener('install', e => {
@@ -17,7 +17,7 @@ self.addEventListener('activate', e => {
 self.addEventListener('fetch', e => {
   const url = new URL(e.request.url);
   // Never cache the backend. Stale trade data is worse than no data.
-  if (url.hostname.endsWith('script.google.com')) return;
+  if (url.hostname.endsWith('script.google.com') || url.hostname.endsWith('googleusercontent.com')) return;
   if (e.request.method !== 'GET') return;
   e.respondWith(
     caches.match(e.request).then(hit => hit || fetch(e.request).then(res => {
