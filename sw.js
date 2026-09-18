@@ -1,5 +1,5 @@
 // Bump CACHE on every deploy or the phone keeps serving the old shell.
-const CACHE = 'setups-v4';
+const CACHE = 'setups-v5';
 const SHELL = ['index.html', 'manifest.json'];
 
 self.addEventListener('install', e => {
