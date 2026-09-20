@@ -302,7 +302,8 @@ nav button.on{color:var(--blue)}
   <button class="btn" id="stSave">Save settings</button>
   <button class="btn ghost" id="bioReg">Set up Face ID on this phone</button>
   <button class="btn ghost" id="wipeWeek">Clear all setups for the week</button>
-  <p style="font-size:11.5px;color:var(--dim);margin-top:16px">Setups v4. Charges follow Zerodha equity rates. Your contract note is the final word.</p>
+  <button class="btn ghost" id="swReset">Reset app cache</button>
+  <p style="font-size:11.5px;color:var(--dim);margin-top:16px">Setups v6. Charges follow Zerodha equity rates. Your contract note is the final word.</p>
 </section>
 </main>
 
@@ -316,6 +317,30 @@ nav button.on{color:var(--blue)}
 
 <script>
 'use strict';
+/* Recovery route. Open /?swreset=1 to unregister the worker and wipe every
+   cache, for when a bad service worker blanks the app. Runs before anything
+   else so it cannot be blocked by the rest of the script. */
+if (location.search.indexOf('swreset=1') > -1) {
+  document.documentElement.innerHTML =
+    '<body style="background:#1A1A1C;color:#E8E8EA;font:15px -apple-system;padding:40px;text-align:center">Resetting\u2026</body>';
+  (function(){
+    var jobs = [];
+    if ('serviceWorker' in navigator) {
+      jobs.push(navigator.serviceWorker.getRegistrations().then(function(rs){
+        return Promise.all(rs.map(function(r){ return r.unregister(); }));
+      }).catch(function(){}));
+    }
+    if (window.caches) {
+      jobs.push(caches.keys().then(function(ks){
+        return Promise.all(ks.map(function(k){ return caches.delete(k); }));
+      }).catch(function(){}));
+    }
+    Promise.all(jobs).then(function(){
+      setTimeout(function(){ location.replace(location.origin + '/'); }, 400);
+    });
+  })();
+  throw new Error('swreset');
+}
 var $ = function(s){ return document.querySelector(s); };
 var N50 = "ADANIENT ADANIPORTS APOLLOHOSP ASIANPAINT AXISBANK BAJAJ-AUTO BAJFINANCE BAJAJFINSV BEL BHARTIARTL CIPLA COALINDIA DRREDDY EICHERMOT ETERNAL GRASIM HCLTECH HDFCBANK HDFCLIFE HINDALCO HINDUNILVR ICICIBANK INDIGO INFY ITC JIOFIN JSWSTEEL KOTAKBANK LT M&M MARUTI MAXHEALTH NESTLEIND NTPC ONGC POWERGRID RELIANCE SBILIFE SBIN SHRIRAMFIN SUNPHARMA TCS TATACONSUM TMPV TATASTEEL TECHM TITAN TRENT ULTRACEMCO WIPRO".split(' ');
 var BREACH = ["Took a second trade without high conviction","Moved the stop","Entered before the trigger","Entered after a gap past the trigger","Cut the target short","Oversized the position"];
@@ -677,12 +702,19 @@ $('#wipeWeek').onclick=function(){
   api('clearWeek').then(function(){ toast('Week cleared.'); return loadWeek(); }).catch(function(e){ toast(e.message); });
 };
 
+$('#swReset').onclick=function(){
+  if(!confirm('Clear the app cache and reload? Your setups and trades are in Google Sheets and are not affected.')) return;
+  location.href = location.origin + '/?swreset=1';
+};
+
 var bg=0;
 document.addEventListener('visibilitychange',function(){
   if(document.hidden) bg=Date.now();
   else if(bg&&Date.now()-bg>60000) lock();
 });
-if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(function(){});
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('sw.js',{scope:'./'}).catch(function(){});
+}
 if(!S.pin&&!localStorage.getItem('setups.cred')){
   $('#lockSub').textContent='First run. Tap Unlock with PIN, leave the box empty.';
   $('#bioBtn').classList.add('hide');
